@@ -13,13 +13,17 @@
 - Nine public GitHub profile/repository/source links returned HTTP 200. LinkedIn returned its automated-request block (999), so profile contents could not be verified.
 - Screenshots were visually reviewed at desktop and mobile layouts.
 
-Vercel analytics reporting still requires enabling Analytics in the project dashboard. No real visitor reports can be verified before that step and actual traffic.
+Vercel analytics is active. The real dashboard was observed with 1 visitor and 2 page views in the selected period. Counts may include owner/setup/test traffic.
 
 ## Deployment verification
 
 - Preview dpl_HDAHEszSbK7mJTkvo9gUVMMxRv5Q: READY. Authenticated homepage request returned 200 with expected content and the production canonical origin.
 - Production dpl_GuEUcVxpm22toAUsPUqqERqG8hgT: READY, target production, aliased to https://gashahun-demise-portfolio.vercel.app.
 - An unauthenticated production Chrome session verified five pages, canonical URLs, sitemap, robots, social image, icon, mobile navigation and no page errors. Axe reported zero A/AA violations on the five pages.
-- The deployed @vercel/analytics/next 2.0.1 script loaded from the provisioned analytics route with HTTP 200. Browser console logs were empty. Dashboard activation remains pending owner approval; no visitor counts are claimed.
+- The deployed @vercel/analytics/next 2.0.1 script loaded from the provisioned analytics route with HTTP 200. Browser console logs were empty. Dashboard activation is confirmed with real reporting; no visitor identities are inferred.
 - Initial Vercel deployment failed after build because the project defaulted to a generic static output directory. Explicit nextjs framework configuration in vercel.json corrected it; preview and production then completed successfully.
 - On continuation, the Vercel Git settings confirmed that gashahundemise21/gashahun-demise-portfolio is connected to the project.
+
+- Analytics activation was completed through the owner’s dashboard interaction. The real Production / Last 7 Days report showed 1 visitor, 2 page views and 1 online during verification. These are transient dashboard observations, not website counters or evidence of recruiter activity.
+- The connected GitHub repository triggered a subsequent Ready production deployment for the documentation commit (gashahun-demise-portfolio-6f80dl7ug-gashahundemise21.vercel.app). Automatic deployment wiring is verified.
+- No account setup or deployment permission blocker remains. Custom events stay disabled on Hobby.
