@@ -8,7 +8,7 @@ Use Node 22+ and npm. `npm ci`, then `npm run dev`. Validation: `npm run lint`, 
 
 ## Content and evidence
 
-See AUDIT.md for sources and limitations. Two implemented software projects are featured. Enset is explicitly a research direction with a title-only public README. No benchmark results are claimed. No CV was available, so no download button is rendered. Add a verified PDF under `public/` and a tracked link when available.
+See AUDIT.md for sources and limitations. Two implemented software projects are featured. Enset is explicitly a research direction with a title-only public README. No benchmark results are claimed. The user-supplied resume is published unchanged under `public/resume/gashahun-demise-resume.pdf`, with download links in the hero and contact sections. Contact email is gashahundemise21@gmail.com.
 
 ## Deployment
 
@@ -20,7 +20,7 @@ Use `npx vercel login` if Vercel authentication is unavailable. Run `npx vercel 
 
 The root layout includes `Analytics` from `@vercel/analytics/next`, enabled only for Vercel builds to avoid analytics endpoint errors on local production servers. The live SDK script returned HTTP 200 on the Vercel-provisioned route. Dashboard activation is confirmed; the real dashboard reported 1 visitor and 2 page views during verification. These early counts may include owner/setup/test traffic. Open the Vercel project dashboard → Analytics → Enable, then redeploy. Open that same dashboard for page views, visitors, popular pages, referrers, broad geography and device/browser/OS information as available. Verify analytics network requests and real visits there. No data or reports are fabricated in this site.
 
-Custom events are disabled by default. Pro/Enterprise support is required according to the reviewed Vercel docs. With a supported plan, set `NEXT_PUBLIC_ANALYTICS_EVENTS=true` and redeploy to record named GitHub, LinkedIn, email, and project repository link clicks. Events contain no personal fields. Page query strings and fragments are stripped. No secret is needed. Local builds skip analytics. Privacy copy is at `/privacy`.
+Custom events are disabled by default. Pro/Enterprise support is required according to the reviewed Vercel docs. With a supported plan, set `NEXT_PUBLIC_ANALYTICS_EVENTS=true` and redeploy to record named GitHub, LinkedIn, email, resume download, featured-project, and project repository link clicks. Events contain no personal fields. Page query strings and fragments are stripped. No secret is needed. Local builds skip analytics. Privacy copy is at `/privacy`.
 
 Official guide: https://vercel.com/docs/analytics/quickstart
 

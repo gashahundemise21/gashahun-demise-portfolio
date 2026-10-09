@@ -27,3 +27,11 @@ Vercel analytics is active. The real dashboard was observed with 1 visitor and 2
 - Analytics activation was completed through the owner’s dashboard interaction. The real Production / Last 7 Days report showed 1 visitor, 2 page views and 1 online during verification. These are transient dashboard observations, not website counters or evidence of recruiter activity.
 - The connected GitHub repository triggered a subsequent Ready production deployment for the documentation commit (gashahun-demise-portfolio-6f80dl7ug-gashahundemise21.vercel.app). Automatic deployment wiring is verified.
 - No account setup or deployment permission blocker remains. Custom events stay disabled on Hobby.
+
+## Resume and email update — 9 October 2026
+
+- Contact email changed to gashahundemise21@gmail.com at the owner's request.
+- Supplied one-page resume published unchanged with hero/contact download links.
+- SHA-256 of source and public PDF: adb815502509d088dc344ebfe5ff2f06ba00a80646ae4a22cf819c8c5c99aa46.
+- Lint, TypeScript, two content tests and production build passed.
+- Chrome verified PDF HTTP 200, application/pdf, attachment header, expected download filename, and exact downloaded bytes. Updated mailto links, responsive layouts, mobile menu and axe checks passed.

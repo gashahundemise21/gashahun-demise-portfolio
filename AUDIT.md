@@ -21,3 +21,7 @@ No CV or verified live project demo was found. No placeholder downloads, forms, 
 ## Implementation plan
 
 Create a concise editorial design in Next.js; separate content and presentation; add source-backed project notes; integrate privacy-conscious Vercel analytics; validate lint, types, build, routes, mobile navigation and accessibility; attempt authenticated Vercel deployment.
+
+## Owner update — 9 October 2026
+
+The owner supplied `Gashahun Demise.pdf` and explicitly requested a public resume download and contact email gashahundemise21@gmail.com. The PDF was checked as a readable one-page document with no encryption or JavaScript, and visually reviewed. It is published byte-for-byte unchanged. Its statements are owner-provided resume content; publishing it does not independently verify its research metrics. The website contact email now uses the owner's explicit correction.
