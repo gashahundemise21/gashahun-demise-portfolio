@@ -1,0 +1,1 @@
+export function SectionPage({label,title,description,children}:{label:string,title:string,description:string,children:React.ReactNode}){return <main id="main" className="section-page"><div className="page-heading"><p className="eyebrow">{label}</p><h1>{title}</h1><p>{description}</p></div>{children}</main>}

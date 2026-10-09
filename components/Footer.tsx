@@ -1,2 +1,3 @@
 import Link from 'next/link';
-export function Footer(){return <footer><span>© {new Date().getFullYear()} Gashahun Demise</span><span>Computer vision. Practical engineering.</span><Link href="/privacy">Privacy</Link></footer>}
+import { profile } from '@/lib/content';
+export function Footer(){return <footer><div><span className="eyebrow">EMAIL</span><a href={'mailto:'+profile.email}>{profile.email}</a></div><div><span className="eyebrow">LOCATION</span>Addis Ababa, Ethiopia</div><div><span className="eyebrow">CONNECT</span><a href={profile.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn ↗</a> · <a href={profile.github} target="_blank" rel="noopener noreferrer">GitHub ↗</a></div><div className="footer-bottom"><span>© {new Date().getFullYear()} Gashahun Demise</span><Link href="/privacy">Privacy</Link></div></footer>}
