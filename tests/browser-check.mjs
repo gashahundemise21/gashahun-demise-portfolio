@@ -14,12 +14,9 @@ const outputDir=process.env.PORTFOLIO_QA_OUTPUT || 'test-results';fs.mkdirSync(o
  const resume=await page.request.get('http://localhost:3000/resume/gashahun-demise-resume.pdf');assert.equal(resume.status(),200);assert.match(resume.headers()['content-type'],/application\/pdf/);assert.match(resume.headers()['content-disposition'],/attachment/);
  const downloadPromise=page.waitForEvent('download');await page.getByRole('link',{name:'Download resume',exact:true}).click();const download=await downloadPromise;assert.equal(download.suggestedFilename(),'Gashahun-Demise-Resume.pdf');assert.deepEqual(fs.readFileSync(await download.path()),fs.readFileSync('public/resume/gashahun-demise-resume.pdf'));
 
- assert.equal(await page.locator('html').getAttribute('data-theme'),'day');
- await page.getByRole('button',{name:'Switch to night theme'}).click();assert.equal(await page.locator('html').getAttribute('data-theme'),'night');
- await page.reload();assert.equal(await page.locator('html').getAttribute('data-theme'),'night');
- const nightAxe=await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21aa']).analyze();assert.deepEqual(nightAxe.violations.map(v=>v.id),[]);
- await page.screenshot({path:outputDir+'/night.png'});
- await page.getByRole('button',{name:'Switch to day theme'}).click();assert.equal(await page.locator('html').getAttribute('data-theme'),'day');
+ assert.equal(await page.getByRole('button',{name:/Switch to .* theme/}).count(),0);
+ await page.evaluate(()=>localStorage.setItem('portfolio-theme','night'));await page.reload();
+ assert.equal(await page.locator('html').getAttribute('data-theme'),null);
  const desktopAxe=await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21aa']).analyze();
  assert.deepEqual(desktopAxe.violations.map(v=>({id:v.id,nodes:v.nodes.map(n=>n.target)})),[]);
  for(const route of ['/skills','/experience','/projects','/education','/research','/projects/saasforge','/projects/taskflow','/projects/enset','/projects/internship-hub','/projects/hope-lounge','/privacy']){
