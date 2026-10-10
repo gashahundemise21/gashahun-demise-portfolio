@@ -1,16 +1,242 @@
 export const profile = {
- name: 'Gashahun Demise', github: 'https://github.com/gashahundemise21', linkedin: 'https://www.linkedin.com/in/gashahun-demise/', email: 'gashahundemise21@gmail.com', resume: '/resume/gashahun-demise-resume.pdf',
+  "name": "Gashahun Demise",
+  "github": "https://github.com/gashahundemise21",
+  "linkedin": "https://www.linkedin.com/in/gashahun-demise/",
+  "email": "gashahundemise21@gmail.com",
+  "resume": "/resume/gashahun-demise-resume.pdf"
 };
 export const projects = [
- {slug:'saasforge',name:'SaaSForge',category:'Full-stack engineering',status:'Public implementation',summary:'A multi-tenant foundation for B2B software, with a Python API and a Next.js interface.',problem:'Business applications need a consistent way to separate organizations, authenticate users, and manage shared workflows.',scope:'The public repository includes frontend and backend application code, database migrations, API services, and test suites. Individual contribution history has not been independently established.',tech:['Python','FastAPI','Next.js','PostgreSQL','SQLAlchemy','Docker'],repo:'https://github.com/gashahundemise21/saasforge',details:[["Implementation", "Next.js frontend, FastAPI backend, PostgreSQL storage, and database migrations."], ["Organization access", "Authentication resolves organization membership for shared application workflows."], ["Status", "Public source includes API and tenant-boundary tests. A production deployment and security audit are not documented."]],sources:[['Architecture','https://github.com/gashahundemise21/saasforge/blob/HEAD/docs/architecture.md'],['Authentication dependencies','https://github.com/gashahundemise21/saasforge/blob/HEAD/backend/app/api/deps.py'],['API test suite','https://github.com/gashahundemise21/saasforge/tree/HEAD/backend/tests/api/v1']]},
- {slug:'taskflow',name:'TaskFlow',category:'Interface engineering',status:'Public implementation',summary:'A focused Kanban interface that organizes tasks into To Do, In Progress, and Done.',problem:'A task board needs a clear workflow and predictable controls for everyday task management.',scope:'The repository contains React components for the board, task cards, search, status selection, task editing, and confirmation dialogs, alongside component tests.',tech:['React','TypeScript','Vite','Vitest'],repo:'https://github.com/gashahundemise21/task-board-app',details:[["Features", "Three task columns, editing, search, status filters, and deletion confirmations."], ["Implementation", "React and TypeScript components, built with Vite. Component tests use Vitest."], ["Status", "Public source is available. No hosted demo is linked."]],sources:[['Board component','https://github.com/gashahundemise21/task-board-app/blob/HEAD/src/components/Board.tsx'],['Components and tests','https://github.com/gashahundemise21/task-board-app/tree/HEAD/src/components'],['Package configuration','https://github.com/gashahundemise21/task-board-app/blob/HEAD/package.json']]},
- {"slug": "internship-hub", "name": "Internship Hub", "category": "Collaborative project · Django", "status": "Maintained implementation", "summary": "A student internship workspace for placements, daily reports, advisor feedback, and company coordination.", "problem": "Students, academic advisors, and industry supervisors need a shared view of placements and progress.", "scope": "A collaborative project credited to Gashahun Demise and Gosaye Woyo. This maintained edition builds on the original gashahun21 repository, preserving author metadata and source attribution.", "tech": ["Python", "Django", "Django Channels", "SQLite", "MySQL", "HTML/CSS"], "repo": "https://github.com/gashahun21/Internship-Management-System", "details":[["Collaboration", "Developed with Gosaye Woyo, based on the original gashahun21 repository."], ["Features", "Role-specific workspaces for students, advisors, supervisors, and company administrators."], ["Maintenance", "The local maintained edition improves sign-in, configuration, and approval checks. AI recommendations remain planned; legacy permissions need further review."]], "sources": [["Original project", "https://github.com/gashahun21/Internship-Management-System"], ["Original README", "https://github.com/gashahun21/Internship-Management-System/blob/main/README.md"], ["Application workflow", "https://github.com/gashahun21/Internship-Management-System/blob/main/myproject/myapp/views.py"]]},
- {"slug": "hope-lounge", "name": "Hope Lounge QR Menu", "category": "Collaborative project · Restaurant software", "status": "Live application", "summary": "A QR menu and restaurant workspace developed for Hope Lounge with Gosaye Woyo.", "problem": "Guests need a convenient mobile menu, while staff need tools to keep items and categories up to date.", "scope": "Developed by Gashahun Demise and Gosaye Woyo for Hope Lounge, as confirmed by the project owner. The live application links to hopeloungemenu.com; the maintained repository preserves the original Gosa5497 source credit.", "tech": ["React", "Django REST Framework", "Vite", "i18next", "Cloudinary"], "repo": "https://github.com/Gosa5497/qr_menu", "live": "https://hopeloungemenu.com/", "details":[["Collaboration", "Developed with Gosaye Woyo for Hope Lounge. Original source is credited to Gosa5497."], ["Features", "Guests can browse the menu in English, Amharic, and Oromo. Staff tools manage items, categories, and QR codes."], ["Implementation", "React and Vite frontend with a Django REST API. The live application is available at hopeloungemenu.com."]], "sources": [["Live Hope Lounge application", "https://hopeloungemenu.com/"], ["Original collaborative source", "https://github.com/Gosa5497/qr_menu"], ["Original README", "https://github.com/Gosa5497/qr_menu/blob/main/README.md"]]},
- {slug:'enset',name:'Enset Disease Guard',category:'Computer vision · research direction',status:'Repository scaffold',summary:'A research direction toward enset disease classification and practical edge AI.',problem:'The proposed focus is image-based support for recognizing enset disease, with attention to agricultural use and deployment constraints.',scope:'The public Enset-Disease-Guard-EdgeAI repository currently contains a title-only README. This page describes the research direction; it does not claim a completed classifier.',tech:['Computer vision','Image classification','Edge AI'],repo:'https://github.com/gashahundemise21/Enset-Disease-Guard-EdgeAI',details:[["Research focus", "Image-based enset disease classification and deployment on constrained devices."], ["Current status", "The public repository contains a title-only README. Dataset, training code, model, and evaluation results are not published."]],sources:[['Public README','https://github.com/gashahundemise21/Enset-Disease-Guard-EdgeAI/blob/HEAD/README.md']]},
-] as const;
-export const skills = [
- ['AI & image processing',['Computer vision','TensorFlow','scikit-learn','OpenCV']],
- ['Python & data',['Python','NumPy','Pandas','SQL']],
- ['Applications & APIs',['React','TypeScript','Next.js','FastAPI','Django']],
- ['Engineering tools',['Git','GitHub','PostgreSQL','Docker']],
+  {
+    "slug": "enset",
+    "name": "Enset disease classification",
+    "category": "Computer vision \u00b7 Research",
+    "status": "Resume-documented research",
+    "summary": "A study of enset leaf disease classification, from dataset preparation and transfer learning to evaluation and edge optimization.",
+    "problem": "Leaf images can vary in lighting, growth stage, and visual symptoms. Disease classification requires careful labels and evaluation that distinguishes disease from natural aging.",
+    "tech": [
+      "Python",
+      "TensorFlow / Keras",
+      "OpenCV",
+      "TensorFlow Lite"
+    ],
+    "repo": "https://github.com/gashahundemise21/Enset-Disease-Guard-EdgeAI",
+    "details": [
+      [
+        "Data & methodology",
+        "The resume documents collecting, labeling, cleaning, and validating leaf images across healthy, bacterial-wilt, and naturally aged classes. The work compares five deep learning models using transfer learning and fine-tuning."
+      ],
+      [
+        "Evaluation approach",
+        "Five-fold cross-validation, precision, recall, F1-score, confusion matrices, and Grad-CAM are documented in the resume. These methods examine class-specific behavior and the image regions that influence a prediction."
+      ],
+      [
+        "Deployment decisions",
+        "Quantization and TensorFlow Lite are documented for mobile and edge deployment. Device latency, memory use, and field testing are not available in the public repository."
+      ],
+      [
+        "Evidence & outcome",
+        "The completed study is documented in my resume. The public repository contains only a title; training artifacts and evaluation outputs are not published there. This case study presents the methodology without numerical performance claims."
+      ]
+    ],
+    "sources": [
+      [
+        "Resume \u00b7 research methods",
+        "/resume/gashahun-demise-resume.pdf"
+      ],
+      [
+        "Public repository status",
+        "https://github.com/gashahundemise21/Enset-Disease-Guard-EdgeAI/blob/HEAD/README.md"
+      ]
+    ],
+    "evidence": "Research methods are resume-documented. Public code and reproducible results are not available."
+  },
+  {
+    "slug": "hope-lounge",
+    "name": "Hope Lounge QR Menu",
+    "category": "Software engineering \u00b7 Collaboration",
+    "status": "Delivered project \u00b7 Demo unavailable",
+    "summary": "A multilingual QR menu and restaurant workspace developed for Hope Lounge.",
+    "problem": "Guests need a mobile menu at the table. Staff need a shared way to manage menu content and the restaurant ordering workflow.",
+    "tech": [
+      "React",
+      "Django REST Framework",
+      "Vite",
+      "i18next",
+      "Cloudinary"
+    ],
+    "repo": "https://github.com/Gosa5497/qr_menu",
+    "live": "https://hopeloungemenu.com/",
+    "details": [
+      [
+        "Role & collaboration",
+        "Developed with Gosaye Woyo for Hope Lounge. The resume describes leading development from design through delivery. Original source credit is retained for the Gosa5497 repository."
+      ],
+      [
+        "System & decisions",
+        "A React/Vite frontend connects to a Django REST API. Language support covers English, Amharic, and Oromo; staff tools manage menu items, categories, and QR codes."
+      ],
+      [
+        "Engineering review",
+        "The maintained local copy includes fixes for allergen matching, tip allocation, and null numeric values. Its frontend and Django test suites passed during the earlier maintenance work. This does not verify the separately hosted application."
+      ],
+      [
+        "Outcome & availability",
+        "The project was delivered for Hope Lounge. On October 10, 2026, its domain returned a cPanel hosting error. The external demo link is retained for reference; current availability and operational impact are not claimed."
+      ]
+    ],
+    "sources": [
+      [
+        "Original collaborative source",
+        "https://github.com/Gosa5497/qr_menu"
+      ],
+      [
+        "Project documentation",
+        "https://github.com/Gosa5497/qr_menu/blob/main/README.md"
+      ]
+    ],
+    "evidence": "Owner-confirmed collaboration. The external demo currently returns a hosting error."
+  },
+  {
+    "slug": "saasforge",
+    "name": "SaaSForge",
+    "category": "Software engineering \u00b7 API architecture",
+    "status": "Public implementation",
+    "summary": "A multi-tenant application foundation with organization-scoped APIs and a separate Next.js frontend.",
+    "problem": "A shared B2B application must resolve the right organization for each request and keep organization data separated while supporting common workflows.",
+    "tech": [
+      "FastAPI",
+      "Next.js",
+      "PostgreSQL",
+      "SQLAlchemy",
+      "Redis",
+      "Docker"
+    ],
+    "repo": "https://github.com/gashahundemise21/saasforge",
+    "details": [
+      [
+        "Architecture",
+        "Next.js handles the interface; FastAPI exposes backend services. Async SQLAlchemy connects to PostgreSQL, Alembic manages schema migrations, and Redis is part of the documented stack."
+      ],
+      [
+        "Tenant boundaries",
+        "The architecture uses organization-scoped rows. JWT-based requests resolve organization context through an organization slug; API keys provide programmatic access. Membership and role checks are important boundaries in this design."
+      ],
+      [
+        "Evaluation & engineering",
+        "The repository includes API tests, cross-tenant tests, and GitHub Actions workflows. These are inspectable engineering artifacts; the upstream suites were not rerun as part of this redesign."
+      ],
+      [
+        "Outcome & scope",
+        "A public implementation and architecture documentation are available. No production deployment, load benchmark, or independent security audit is claimed. This case study describes the publicly documented architecture rather than attributing individual contributions."
+      ]
+    ],
+    "sources": [
+      [
+        "Architecture",
+        "https://github.com/gashahundemise21/saasforge/blob/HEAD/docs/architecture.md"
+      ],
+      [
+        "Authentication dependencies",
+        "https://github.com/gashahundemise21/saasforge/blob/HEAD/backend/app/api/deps.py"
+      ],
+      [
+        "API tests",
+        "https://github.com/gashahundemise21/saasforge/tree/HEAD/backend/tests/api/v1"
+      ]
+    ],
+    "evidence": "Implementation and architecture verified against public repository documentation."
+  },
+  {
+    "slug": "taskflow",
+    "name": "TaskFlow",
+    "category": "Software engineering \u00b7 Interface",
+    "status": "Public implementation",
+    "summary": "A focused Kanban board with task editing, search, status filters, and component tests.",
+    "problem": "Everyday task management needs clear states and predictable controls without adding complexity to the board.",
+    "tech": [
+      "React",
+      "TypeScript",
+      "Vite",
+      "Vitest"
+    ],
+    "repo": "https://github.com/gashahundemise21/task-board-app",
+    "details": [
+      [
+        "Interface design",
+        "The board composes To Do, In Progress, and Done columns. Task cards, editing controls, search/filter tools, and confirmation dialogs define the interaction scope."
+      ],
+      [
+        "Engineering decisions",
+        "React components communicate through explicit props and callbacks. TypeScript describes the interface contracts, while Vite provides the frontend build."
+      ],
+      [
+        "Evaluation",
+        "Component tests are included for task cards and search/filter controls. Build, lint, typecheck, and Vitest scripts are present; their upstream execution is not asserted here."
+      ],
+      [
+        "Outcome & scope",
+        "The implementation is publicly inspectable. A hosted demonstration, multi-user behavior, and usage metrics are not documented."
+      ]
+    ],
+    "sources": [
+      [
+        "Board component",
+        "https://github.com/gashahundemise21/task-board-app/blob/HEAD/src/components/Board.tsx"
+      ],
+      [
+        "Components & tests",
+        "https://github.com/gashahundemise21/task-board-app/tree/HEAD/src/components"
+      ],
+      [
+        "Package scripts",
+        "https://github.com/gashahundemise21/task-board-app/blob/HEAD/package.json"
+      ]
+    ],
+    "evidence": "Public components and test files support the described interface scope."
+  },
+  {
+    "slug": "internship-hub",
+    "name": "Internship Hub",
+    "category": "Software engineering \u00b7 Collaboration",
+    "status": "Maintained local edition",
+    "summary": "A multi-role workspace for placements, daily reports, advisor feedback, and supervisor coordination.",
+    "problem": "Students, academic advisors, and industry supervisors need shared visibility into placements and student progress.",
+    "tech": [
+      "Python",
+      "Django",
+      "Django Channels",
+      "SQLite",
+      "MySQL"
+    ],
+    "repo": "https://github.com/gashahun21/Internship-Management-System",
+    "details": [
+      [
+        "Role & collaboration",
+        "Developed with Gosaye Woyo. The resume describes system design and frontend development. The maintained local edition preserves the original repository attribution."
+      ],
+      [
+        "Workflow",
+        "Role-specific workspaces support students, advisors, supervisors, department heads, and company administrators. Placement tracking and reports connect the academic and company sides of the internship."
+      ],
+      [
+        "Maintenance decisions",
+        "The local edition adds environment-based configuration, a responsive sign-in interface, repaired ASGI setup, and reproducible dependencies. Approval and rejection require POST and company ownership."
+      ],
+      [
+        "Verification & scope",
+        "Eight regression tests and Django checks passed in the maintained local edition during earlier work. Its changes are not yet published as a new repository. Legacy role/chat permissions need further review, and the public implementation does not establish the AI features described in the resume."
+      ]
+    ],
+    "sources": [
+      [
+        "Original implementation",
+        "https://github.com/gashahun21/Internship-Management-System"
+      ],
+      [
+        "Application workflow",
+        "https://github.com/gashahun21/Internship-Management-System/blob/main/myproject/myapp/views.py"
+      ]
+    ],
+    "evidence": "Original public source and a tested local maintenance edition. AI features are not established by the inspected source."
+  }
 ] as const;

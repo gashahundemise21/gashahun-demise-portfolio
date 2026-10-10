@@ -1,5 +1,4 @@
 import { ImageResponse } from 'next/og';
-export const alt='Gashahun Demise — Computer Vision & Machine Learning';
-export const size={width:1200,height:630};
-export const contentType='image/png';
-export default function Image(){return new ImageResponse(<div style={{background:'#08172e',color:'#ffffff',width:'100%',height:'100%',display:'flex',flexDirection:'column',justifyContent:'center',padding:90}}><div style={{fontSize:24,color:'#c1c7ce',marginBottom:40}}>GASHAHUN DEMISE / COMPUTER VISION</div><div style={{fontSize:76,lineHeight:1.1}}>Turning visual data</div><div style={{fontSize:76,color:'#c1c7ce'}}>into practical AI.</div><div style={{fontSize:26,marginTop:50}}>Research-minded. Engineering-focused.</div></div>,size)}
+export const alt='Gashahun Demise — Computer Vision Researcher & Software Engineer';
+export const size={width:1200,height:630};export const contentType='image/png';
+export default function Image(){return new ImageResponse(<div style={{background:'#0c1922',color:'#eef0e8',width:'100%',height:'100%',display:'flex',flexDirection:'column',justifyContent:'center',padding:85}}><div style={{fontSize:20,letterSpacing:4,color:'#aab9bc',marginBottom:38}}>COMPUTER VISION / RESEARCH & ENGINEERING</div><div style={{fontSize:100,lineHeight:1.05}}>Gashahun Demise.</div><div style={{fontSize:36,color:'#c2e5aa',marginTop:30}}>From visual data to useful systems.</div><div style={{display:'flex',borderTop:'1px solid #304149',paddingTop:28,marginTop:65,fontSize:20,color:'#aab9bc'}}>EAII · Addis Ababa, Ethiopia</div></div>,size)}

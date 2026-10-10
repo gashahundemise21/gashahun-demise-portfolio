@@ -28,7 +28,7 @@ const outputDir=process.env.PORTFOLIO_QA_OUTPUT || 'test-results';fs.mkdirSync(o
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true,'overflow at '+width);
   if(width===390){
    await page.getByRole('button',{name:'Open navigation'}).click();assert.equal(await page.getByRole('button',{name:'Close navigation'}).getAttribute('aria-expanded'),'true');
-   await page.locator('#main-nav').getByRole('link',{name:'Projects',exact:true}).click();assert.equal(await page.getByRole('button',{name:'Open navigation'}).getAttribute('aria-expanded'),'false');
+   await page.keyboard.press('Escape');assert.equal(await page.getByRole('button',{name:'Open navigation'}).getAttribute('aria-expanded'),'false');assert.equal(await page.evaluate(()=>document.activeElement.getAttribute('aria-label')),'Open navigation');await page.getByRole('button',{name:'Open navigation'}).click();await page.locator('#main-nav').getByRole('link',{name:'Projects',exact:true}).click();assert.equal(await page.getByRole('button',{name:'Open navigation'}).getAttribute('aria-expanded'),'false');
    await page.screenshot({path:outputDir+'/mobile.png',fullPage:true});
    const results=await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21aa']).analyze();assert.deepEqual(results.violations.map(v=>v.id),[]);
   }
