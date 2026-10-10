@@ -10,7 +10,7 @@ const outputDir=process.env.PORTFOLIO_QA_OUTPUT || 'test-results';fs.mkdirSync(o
  await page.goto('http://localhost:3000',{waitUntil:'networkidle'});
  await page.screenshot({path:outputDir+'/desktop.png',fullPage:true});
  assert.equal(await page.locator('h1').count(),1);
- assert.equal(await page.locator('a[href="mailto:gashahundemise21@gmail.com"]').count(),3);
+ assert.equal(await page.locator('a[href="mailto:gashahundemise21@gmail.com"]').count(),1);
  const resume=await page.request.get('http://localhost:3000/resume/gashahun-demise-resume.pdf');assert.equal(resume.status(),200);assert.match(resume.headers()['content-type'],/application\/pdf/);assert.match(resume.headers()['content-disposition'],/attachment/);
  const downloadPromise=page.waitForEvent('download');await page.getByRole('link',{name:'Download resume',exact:true}).click();const download=await downloadPromise;assert.equal(download.suggestedFilename(),'Gashahun-Demise-Resume.pdf');assert.deepEqual(fs.readFileSync(await download.path()),fs.readFileSync('public/resume/gashahun-demise-resume.pdf'));
 
