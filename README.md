@@ -9,7 +9,7 @@ Use Node 22+ and npm. `npm ci`, then `npm run dev`. Validation: `npm run lint`, 
 ## Content and evidence
 
 All copy and data live in `lib/content.ts`; pages and components only render it. See AUDIT.md for sources.
-The research section and charts use the numbers in the Enset manuscript draft (unpublished, labelled as such).
+The enset study is unpublished: the site shows only its title and a teaser, and every "see the study" control opens an "It will be opened soon" popover (`components/SoonButton.tsx`). Keep results out of the source until the paper is public.
 `profile.resume` is `null` because the previous PDF was removed from `public/resume/`. The site then offers
 "Request resume" by email. To publish a resume, add the approved PDF under `public/resume/` and set the path.
 
@@ -30,13 +30,12 @@ Official guide: https://vercel.com/docs/analytics/quickstart
 ## Files
 
 - `app/page.tsx`: single-page overview (hero, about, research, work, experience, skills, education, contact).
-- `app/research/page.tsx`: the enset study (problem, dataset, evaluation design, results, limitations).
+- `app/research/page.tsx`: a no-index "coming soon" placeholder for the unpublished study.
 - `app/projects/[slug]/page.tsx`: case studies (problem → approach → architecture → implementation → challenges → results → lessons).
-- `components/charts.tsx`: confusion matrix, model comparison and class balance, rendered from the manuscript tables.
 - `components/SystemDiagram.tsx`: architecture lanes drawn from each project's documentation.
 - `app/globals.css`: light design tokens on a white canvas (teal and amber accents), responsive and reduced-motion styles. JetBrains Mono (OFL) is self-hosted through `next/font`.
-- `next.config.ts`: security headers and redirects from the old `/skills`, `/experience`, `/education`, `/projects/enset` URLs.
-- `tests/content.test.mjs`: checks the published numbers against each other (fold means/SDs, confusion-matrix rates) and that no private links appear.
+- `next.config.ts`: security headers and redirects from the old `/skills`, `/experience`, `/education` and `/projects/enset` URLs.
+- `tests/content.test.mjs`: checks that no unpublished study figures, private links or credentials appear in the source.
 - `tests/browser-check.mjs`: axe WCAG A/AA in light and dark, links, anchors, redirects, widths 360–1024, mobile menu, 404, OG image.
 
 No contact service, credentials, backend database, or owner dashboard is required. Email and social links provide contact options. The technical illustrations are conceptual graphics, not model output or application screenshots.

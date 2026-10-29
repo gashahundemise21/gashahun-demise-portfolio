@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { projects } from '@/lib/content';
+import { SoonButton } from '@/components/SoonButton';
 
 export const metadata = { title: 'Projects', alternates: { canonical: '/projects' } };
 
@@ -14,12 +15,12 @@ export default function Projects() {
       </header>
       <ul className="index-list">
         <li>
-          <Link href="/research">
-            <span className="more-kind">Computer vision research · 2025 – present</span>
+          <SoonButton className="index-row">
+            <span className="more-kind">Computer vision research · coming soon</span>
             <span className="more-name">Senescence-aware enset disease classification</span>
-            <span className="more-summary">Is that leaf sick, or just old? Five models, honest splits.</span>
+            <span className="more-summary">Is that leaf sick, or just old?</span>
             <ArrowRight size={18} aria-hidden="true" />
-          </Link>
+          </SoonButton>
         </li>
         {projects.map(p => (
           <li key={p.slug}>

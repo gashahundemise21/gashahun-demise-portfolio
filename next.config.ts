@@ -11,7 +11,7 @@ const config: NextConfig = {
       { source: '/skills', destination: '/#skills', permanent: true },
       { source: '/experience', destination: '/#experience', permanent: true },
       { source: '/education', destination: '/#education', permanent: true },
-      { source: '/projects/enset', destination: '/research', permanent: true },
+      { source: '/projects/enset', destination: '/#research', permanent: false },
     ];
   },
   async headers() {

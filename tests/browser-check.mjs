@@ -53,11 +53,23 @@ try {
   }
 
   // Old URLs redirect to their new homes.
-  for (const [from, to] of [['/skills', '/#skills'], ['/experience', '/#experience'], ['/education', '/#education'], ['/projects/enset', '/research']]) {
+  for (const [from, to, code] of [['/skills', '/#skills', 308], ['/experience', '/#experience', 308], ['/education', '/#education', 308], ['/projects/enset', '/#research', 307]]) {
     const r = await page.request.get(base + from, { maxRedirects: 0 });
-    assert.equal(r.status(), 308, from);
+    assert.equal(r.status(), code, from);
     assert.equal(r.headers().location, to, from);
   }
+
+  // Unpublished research: the study controls show a "coming soon" popover instead of opening anything.
+  await page.goto(base, { waitUntil: 'networkidle' });
+  const study = page.getByRole('button', { name: /See the full study/ });
+  await study.click();
+  await page.waitForFunction(() => [...document.querySelectorAll('.soon-pop.show')].some(e => e.textContent === 'It will be opened soon'));
+  assert.equal(page.url(), base + '/');
+  await page.keyboard.press('Escape');
+  await page.waitForFunction(() => !document.querySelector('.soon-pop.show'));
+  assert.equal(await page.locator('meta[name="robots"][content*="noindex"]').count(), 0);
+  await page.goto(base + '/research');
+  assert.equal(await page.locator('meta[name="robots"][content*="noindex"]').count(), 1);
 
   // Responsive widths without horizontal overflow, and the mobile menu.
   for (const width of [360, 390, 768, 1024]) {

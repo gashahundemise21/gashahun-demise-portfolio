@@ -31,80 +31,15 @@ export const about = {
 };
 
 // ---------------------------------------------------------------------------------------------
-// Research: Senescence-aware enset classification. Numbers are taken from the manuscript draft
-// (Springer LNCS format, September 2026). It is unpublished; the site says so wherever it is cited.
-
-export type ModelResult = {
-  name: string;
-  folds: [number, number, number, number, number]; // held-out test accuracy (%) per fold-trained model
-  mean: number;
-  sd: number;
-  f1: number; // macro F1 mean (%)
-  params: number; // total parameters
-};
+// Research. The study is unpublished, so the site shows only its title and a short teaser.
+// Do not add results, data details or methods here until the paper is public.
 
 export const enset = {
   title: 'Senescence-Aware Enset Disease Classification Using Deep Learning Models',
-  status: 'Unpublished manuscript',
-  role: 'Second and corresponding author, EAII team of six',
+  status: 'Unpublished · coming soon',
   period: '2025 – present',
   question: 'Is that yellow leaf sick, or just old?',
-  why: 'Enset feeds about 20 million Ethiopians, and bacterial wilt threatens it. Old leaves also turn yellow, so a sick-or-healthy model raises false alarms.',
-  contribution: 'So ageing gets its own class, and we measure exactly how often an old leaf is mistaken for disease.',
-  dataset: {
-    total: 7545,
-    region: 'Gurage Zone, Ethiopia',
-    devices: 'Phone cameras, natural light, real farms',
-    labelling: 'Labelled from field symptoms with a plant researcher',
-    classes: [
-      { key: 'healthy', label: 'Healthy', count: 2607, share: 34.55 },
-      { key: 'wilt', label: 'Bacterial wilt', count: 2476, share: 32.82 },
-      { key: 'aged', label: 'Aged (senescent)', count: 2462, share: 32.63 },
-    ],
-  },
-  protocol: [
-    ['Split by plant', 'Photos of one plant never cross the split.'],
-    ['Untouched test set', 'Used once, for the final score.'],
-    ['Five folds', 'Five models per backbone, reported as mean ± SD.'],
-    ['Bayesian search', 'Tuned on training data only.'],
-    ['Train-only augmentation', 'Rotations, shifts, zoom, brightness, flips.'],
-    ['Same head everywhere', 'A fair comparison across five backbones.'],
-  ] as const,
-  models: [
-    { name: 'MobileNetV3-Small', folds: [94.88, 95.69, 96.29, 95.49, 94.74], mean: 95.42, sd: 0.63, f1: 95.42, params: 695803 },
-    { name: 'MobileNetV2', folds: [96.97, 93.84, 94.8, 96.02, 94.67], mean: 95.26, sd: 1.23, f1: 95.27, params: 1385907 },
-    { name: 'InceptionV3', folds: [94.88, 92.02, 94.8, 94.85, 92.21], mean: 93.75, sd: 1.5, f1: 93.77, params: 21934371 },
-    { name: 'EfficientNet-B0', folds: [89.49, 93.4, 91.24, 93.4, 91.17], mean: 91.74, sd: 1.67, f1: 91.69, params: 4214438 },
-    { name: 'ResNet50', folds: [85.51, 85.57, 86.12, 88.14, 85.92], mean: 86.25, sd: 1.08, f1: 86.04, params: 23727491 },
-  ] satisfies ModelResult[],
-  // Fold 3 of MobileNetV3-Small, held-out test set. Rows: true class; columns: predicted class.
-  confusion: {
-    labels: ['Healthy', 'Bacterial wilt', 'Aged'],
-    matrix: [
-      [476, 7, 19],
-      [10, 453, 9],
-      [3, 7, 500],
-    ],
-  },
-  binary: { mean: 97.08, sd: 0.9 },
-  findings: [
-    'Smallest model, best score: MobileNetV3-Small hit 95.42 ± 0.63% with 695,803 parameters.',
-    'Bigger did not help: ResNet50 is 34× larger and scored 86.25%.',
-    'Only 7 of 510 old leaves were flagged as wilt (1.37%).',
-    'A two-class model scores 97.08%, but it solves an easier problem.',
-  ],
-  limits: [
-    'One region, two phones. More farms and varieties next.',
-    'Proving the Aged class cuts false alarms needs a paired test against the two-class model.',
-    'On-device speed and memory are not measured yet.',
-  ],
-  // Earlier work on the same data, documented in the owner's research resume: an audit that found
-  // duplicate images crossing split boundaries and led to the leakage-resistant protocol above.
-  audit: {
-    title: 'Why so strict?',
-    text: 'Early scores looked too good. A leakage audit found duplicate photos on both sides of the split, so I rebuilt the evaluation around plants. Only the rebuilt numbers are shown.',
-    methods: ['Exact hashing', 'Perceptual hashing', 'CNN embeddings', 'Cosine similarity', 'Clustering'],
-  },
+  teaser: 'A lightweight model that tells bacterial wilt from natural leaf ageing in enset, a staple crop in Ethiopia.',
 };
 
 // ---------------------------------------------------------------------------------------------

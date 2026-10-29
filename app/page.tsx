@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { ArrowRight, ArrowUpRight, Briefcase, Mail, MapPin } from 'lucide-react';
 import { Github, Linkedin } from '@/components/BrandIcons';
 import { about, certifications, education, enset, experience, languages, profile, projects, skills } from '@/lib/content';
-import { ModelComparison } from '@/components/charts';
+import { SoonButton } from '@/components/SoonButton';
 import { SystemDiagram } from '@/components/SystemDiagram';
 import { ResumeLink } from '@/components/ResumeLink';
 import { TrackedLink } from '@/components/TrackedLink';
@@ -61,7 +61,7 @@ export default function Home() {
             <div className="actions">
               <a className="button primary" href="#contact">Contact me</a>
               <a className="button secondary" href="#work">View projects</a>
-              <Link className="button secondary" href="/research">Read the research <ArrowRight size={15} aria-hidden="true" /></Link>
+              <SoonButton className="button secondary">Read the research <ArrowRight size={15} aria-hidden="true" /></SoonButton>
             </div>
             <div className="pills">
               <TrackedLink event="github" className="pill" href={profile.github} target="_blank" rel="noopener noreferrer"><Github size={14} aria-hidden="true" />GitHub</TrackedLink>
@@ -101,19 +101,12 @@ export default function Home() {
         <SectionHead index="02" label="research" title="Research">
           <p className="section-sub">{enset.question}</p>
         </SectionHead>
-        <div className="research-grid">
-          <div className="research-text">
-            <p className="status-chip">{enset.status}</p>
-            <h3>{enset.title}</h3>
-            <p>{enset.why}</p>
-            <p>{enset.contribution}</p>
-            <ul className="protocol-mini">
-              {enset.protocol.slice(0, 3).map(([t]) => <li key={t}>{t}</li>)}
-            </ul>
-            <Link className="text-link strong" href="/research">See the full study <ArrowRight size={16} aria-hidden="true" /></Link>
-          </div>
-          <ModelComparison />
-        </div>
+        <article className="research-card">
+          <p className="status-chip">{enset.status}</p>
+          <h3>{enset.title}</h3>
+          <p>{enset.teaser}</p>
+          <SoonButton className="text-link strong">See the full study <ArrowRight size={16} aria-hidden="true" /></SoonButton>
+        </article>
       </section>
 
       <section id="work" className="section wrap work">

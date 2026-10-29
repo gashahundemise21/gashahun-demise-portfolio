@@ -10,7 +10,7 @@ import './globals.css';
 const mono = JetBrains_Mono({ subsets: ['latin'], weight: ['400', '500', '700'], variable: '--font-mono', display: 'swap' });
 
 const description =
-  'Machine learning engineer and computer vision researcher at the Ethiopian Artificial Intelligence Institute. Senescence-aware enset disease classification, leakage-resistant evaluation, and applied software.';
+  'Machine learning engineer and computer vision researcher at the Ethiopian Artificial Intelligence Institute. Plant disease vision, honest evaluation and applied software.';
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

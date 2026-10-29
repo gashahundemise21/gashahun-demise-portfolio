@@ -39,7 +39,7 @@ Vercel analytics is active. The real dashboard was observed with 1 visitor and 2
 ## Redesign — 29 October 2026 (local only; not deployed)
 
 - Next.js upgraded 16.4.0 → 16.4.3 (and eslint-config-next) after `npm audit --omit=dev` reported critical advisories GHSA-2464-fhr4-w9xw, GHSA-p3m5-59mp-jv5r and GHSA-673q-mjm6-r5xr for 16.0.0–16.4.0. Production audit afterwards: 0 vulnerabilities.
-- `npm run lint`, `npm run typecheck`: pass. `npm test`: 5/5 (number consistency, unpublished labelling, no private links, resume config).
+- `npm run lint`, `npm run typecheck`: pass. `npm test`: content checks (no unpublished figures, no private links, resume config).
 - `npm run build`: pass, 14 static routes.
 - `npm run test:browser` (installed Chrome, production server): 8 routes in light and dark with zero axe WCAG 2 A/AA / 2.1 AA violations; internal links and anchors resolve; legacy URLs return 308 to their new locations; no horizontal overflow at 360/390/768/1024 on home, research and a case study; mobile menu and Escape focus return; reduced motion; 404; skip link; OG image, sitemap, robots; no page or console errors.
 - `npm run test:metadata`: pass. Local desktop observation: CLS 0, LCP 280 ms, 16 resources (local Chrome only, not field data).

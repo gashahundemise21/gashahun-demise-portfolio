@@ -5,6 +5,7 @@ import { ArrowLeft, ArrowUpRight } from 'lucide-react';
 import { projects } from '@/lib/content';
 import { TrackedLink } from '@/components/TrackedLink';
 import { SystemDiagram } from '@/components/SystemDiagram';
+import { SoonButton } from '@/components/SoonButton';
 
 type Params = { params: Promise<{ slug: string }> };
 
@@ -72,7 +73,7 @@ export default async function ProjectPage({ params }: Params) {
       <nav className="case-next" aria-label="Other projects">
         <p className="eyebrow">More work</p>
         <ul>
-          <li><Link href="/research">Senescence-aware enset classification <span>Research</span></Link></li>
+          <li><SoonButton className="next-row">Senescence-aware enset classification <span>Research · coming soon</span></SoonButton></li>
           {others.map(o => <li key={o.slug}><Link href={'/projects/' + o.slug}>{o.name} <span>{o.kind}</span></Link></li>)}
         </ul>
       </nav>
