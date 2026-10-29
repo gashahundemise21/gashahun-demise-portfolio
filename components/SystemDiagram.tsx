@@ -20,7 +20,7 @@ export function SystemDiagram({ project, label }: { project: Project; label?: st
           </li>
         ))}
       </ol>
-      <figcaption>Drawn from the project documentation. It shows components and how they connect, not a screenshot.</figcaption>
+      <figcaption>From the project docs. A diagram, not a screenshot.</figcaption>
     </figure>
   );
 }

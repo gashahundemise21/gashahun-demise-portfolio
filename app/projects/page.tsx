@@ -10,14 +10,14 @@ export default function Projects() {
       <header className="case-head">
         <p className="eyebrow">Projects</p>
         <h1>Research and software</h1>
-        <p className="paper-dek">One research study and four software projects. Each case study separates what was built from what can be verified publicly.</p>
+        <p className="paper-dek">One study, four builds.</p>
       </header>
       <ul className="index-list">
         <li>
           <Link href="/research">
             <span className="more-kind">Computer vision research · 2025 – present</span>
             <span className="more-name">Senescence-aware enset disease classification</span>
-            <span className="more-summary">Three-class leaf classification with natural ageing modelled explicitly. Five backbones evaluated on plant-wise splits.</span>
+            <span className="more-summary">Is that leaf sick, or just old? Five models, honest splits.</span>
             <ArrowRight size={18} aria-hidden="true" />
           </Link>
         </li>

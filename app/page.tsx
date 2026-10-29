@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { ArrowRight, ArrowUpRight, Briefcase, GraduationCap, Mail, MapPin } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, Briefcase, Mail, MapPin } from 'lucide-react';
 import { Github, Linkedin } from '@/components/BrandIcons';
 import { about, certifications, education, enset, experience, languages, profile, projects, skills } from '@/lib/content';
 import { ConfusionMatrix, ModelComparison } from '@/components/charts';
@@ -12,16 +12,16 @@ export const metadata = { alternates: { canonical: '/' } };
 
 const lead = enset.models[0];
 const facts = [
-  [enset.dataset.total.toLocaleString('en-US'), 'field images, three classes'],
-  [lead.mean.toFixed(2) + '%', `mean test accuracy, ±${lead.sd.toFixed(2)} across five folds`],
-  ['1.37%', 'aged leaves misread as wilt (best fold)'],
-  [(lead.params / 1e3).toFixed(0) + 'k', 'parameters, smallest of five backbones'],
+  [enset.dataset.total.toLocaleString('en-US'), 'field photos, three classes'],
+  [lead.mean.toFixed(2) + '%', `mean accuracy, ±${lead.sd.toFixed(2)}`],
+  ['1.37%', 'old leaves mistaken for wilt'],
+  [(lead.params / 1e3).toFixed(0) + 'k', 'parameters, the smallest model'],
 ] as const;
 
 const highlights = [
-  ['Computer vision research', 'Plant disease classification and growth monitoring at EAII since July 2025'],
-  ['Evaluation rigour', 'Plant-wise splits, five-fold protocols and leakage audits before any number is reported'],
-  ['Full stack', 'React, Django and FastAPI applications, one delivered to a restaurant client'],
+  ['Vision research', 'Plant disease and growth models at EAII.'],
+  ['Honest numbers', 'Leak-free splits before any score.'],
+  ['Full stack', 'React and Django apps, shipped.'],
 ] as const;
 
 const personSchema = {
@@ -60,10 +60,7 @@ export default function Home() {
             <p className="eyebrow">{profile.headline}</p>
             <h1 id="hero-title">{profile.name}</h1>
             <p className="tagline">Computer vision that survives honest evaluation</p>
-            <p className="intro">
-              Researcher at the Ethiopian Artificial Intelligence Institute and PhD student in AI Engineering at Addis Ababa University.
-              I take vision problems from field images and labelling rules to leakage-resistant evaluation, and build the software around the models.
-            </p>
+            <p className="intro">I teach machines to see crops, and I prove the results hold up.</p>
             <ul className="highlights" aria-label="Highlights">
               {highlights.map(([title, text]) => (
                 <li key={title}><span className="hl-title">{title}</span><span>{text}</span></li>
@@ -85,7 +82,6 @@ export default function Home() {
             <dl>
               <div><dt><MapPin size={13} aria-hidden="true" />Location</dt><dd>{profile.location}</dd></div>
               <div><dt><Briefcase size={13} aria-hidden="true" />Currently</dt><dd>Computer Vision Researcher, EAII</dd></div>
-              <div><dt><GraduationCap size={13} aria-hidden="true" />Studying</dt><dd>PhD, AI Engineering · Addis Ababa University</dd></div>
               <div><dt><Mail size={13} aria-hidden="true" />Email</dt><dd><a href={'mailto:' + profile.email}>{profile.email}</a></dd></div>
               <div><dt><Github size={13} aria-hidden="true" />GitHub</dt><dd><a href={profile.github} target="_blank" rel="noopener noreferrer">github.com/gashahundemise21</a></dd></div>
             </dl>
@@ -104,7 +100,7 @@ export default function Home() {
               </div>
             ))}
           </dl>
-          <p className="facts-note">From the senescence-aware enset study. {enset.status}.</p>
+          <p className="facts-note">Enset study · {enset.status}</p>
         </div>
       </section>
 
@@ -136,7 +132,7 @@ export default function Home() {
             <ul className="protocol-mini">
               {enset.protocol.slice(0, 3).map(([t]) => <li key={t}>{t}</li>)}
             </ul>
-            <Link className="text-link strong" href="/research">Methods, results and limitations <ArrowRight size={16} aria-hidden="true" /></Link>
+            <Link className="text-link strong" href="/research">See the full study <ArrowRight size={16} aria-hidden="true" /></Link>
           </div>
           <ModelComparison />
         </div>
@@ -144,7 +140,7 @@ export default function Home() {
 
       <section id="work" className="section wrap work">
         <SectionHead index="03" label="projects" title="Projects">
-          <p className="section-sub">Delivered and public projects. Each case study says what can and cannot be verified.</p>
+          <p className="section-sub">Real users, real code.</p>
         </SectionHead>
         <div className="work-featured">
           {featured.map((p, i) => (
@@ -162,7 +158,7 @@ export default function Home() {
           ))}
         </div>
         <div className="work-more">
-          <h3 className="minor-title">Other public code</h3>
+          <h3 className="minor-title">More code</h3>
           <ul>
             {more.map(p => (
               <li key={p.slug}>
@@ -200,7 +196,7 @@ export default function Home() {
 
       <section id="skills" className="section wrap skills">
         <SectionHead index="05" label="skills" title="Technical skills">
-          <p className="section-sub">Listed only where the resume, the research or the projects above back them up.</p>
+          <p className="section-sub">Only what I have actually used.</p>
         </SectionHead>
         <div className="skill-grid">
           {skills.map(s => (
@@ -217,7 +213,7 @@ export default function Home() {
         <div className="edu-grid">
           {education.map(e => (
             <article key={e.degree} className={'edu ' + e.status}>
-              <p className="edu-period">{e.period}<span className="edu-status">{e.status === 'ongoing' ? 'Ongoing' : 'Completed'}</span></p>
+              <p className="edu-period">{e.period}<span className="edu-status">Completed</span></p>
               <h3>{e.degree}</h3>
               <p className="edu-school">{e.school}</p>
               <p>{e.note}</p>
@@ -234,14 +230,14 @@ export default function Home() {
 
       <section id="contact" className="section wrap contact">
         <SectionHead index="07" label="contact" title="Get in touch">
-          <p className="section-sub">Open to machine learning, computer vision and research engineering roles, and to research collaboration.</p>
+          <p className="section-sub">Open to ML, computer vision and research roles.</p>
         </SectionHead>
         <div className="contact-grid">
           <TrackedLink event="email" className="contact-email" href={'mailto:' + profile.email}>
             <Mail size={22} aria-hidden="true" />{profile.email}
           </TrackedLink>
           <div className="contact-side">
-            <p>Email is the most direct way to reach me. For a role or a research collaboration, a short note about the problem you are working on helps me give a useful reply.</p>
+            <p>Have a problem worth solving? Email me.</p>
             <div className="actions">
               <ResumeLink className="button primary" />
               <TrackedLink event="github" className="button secondary" href={profile.github} target="_blank" rel="noopener noreferrer"><Github size={15} aria-hidden="true" />GitHub</TrackedLink>

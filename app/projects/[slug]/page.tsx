@@ -64,7 +64,7 @@ export default async function ProjectPage({ params }: Params) {
               ))}
             </div>
           ) : (
-            <p className="muted-note">No public link. The source is private.</p>
+            <p className="muted-note">Private code. No public link.</p>
           )}
         </aside>
       </div>

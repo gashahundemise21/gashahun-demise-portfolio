@@ -34,7 +34,7 @@ Official guide: https://vercel.com/docs/analytics/quickstart
 - `app/projects/[slug]/page.tsx`: case studies (problem → approach → architecture → implementation → challenges → results → lessons).
 - `components/charts.tsx`: confusion matrix, model comparison and class balance, rendered from the manuscript tables.
 - `components/SystemDiagram.tsx`: architecture lanes drawn from each project's documentation.
-- `app/globals.css`: dark design tokens (teal and amber accents), responsive and reduced-motion styles. JetBrains Mono (OFL) is self-hosted through `next/font`.
+- `app/globals.css`: light design tokens on a white canvas (teal and amber accents), responsive and reduced-motion styles. JetBrains Mono (OFL) is self-hosted through `next/font`.
 - `next.config.ts`: security headers and redirects from the old `/skills`, `/experience`, `/education`, `/projects/enset` URLs.
 - `tests/content.test.mjs`: checks the published numbers against each other (fold means/SDs, confusion-matrix rates) and that no private links appear.
 - `tests/browser-check.mjs`: axe WCAG A/AA in light and dark, links, anchors, redirects, widths 360–1024, mobile menu, 404, OG image.

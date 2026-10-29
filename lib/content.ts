@@ -14,21 +14,19 @@ export const profile = {
   // Set to a path under public/ (for example '/resume/gashahun-demise-resume.pdf') once an
   // approved, current resume is placed there. While null, the site offers the resume on request.
   resume: null as string | null,
-  roles: ['Machine Learning Engineer', 'Computer Vision Engineer', 'AI Engineer', 'Software Engineer'],
 };
 
 export const about = {
-  lead: 'I work on the part of machine learning that decides whether a result can be trusted: how the data was collected and labelled, how it was split, and what the errors actually look like.',
+  lead: 'Good models start with good data and honest tests.',
   paragraphs: [
-    'At the Ethiopian Artificial Intelligence Institute I research computer vision systems for plant disease classification and crop and animal growth monitoring. Most of that work happens before training starts: defining class taxonomies, writing labelling guidelines and edge-case rules, running annotation QA, and converting datasets between YOLO, COCO and Pascal VOC so that experiments can be reproduced.',
-    'My main study so far is a senescence-aware classifier for enset, a staple crop in Ethiopia. Naturally ageing leaves yellow in ways that resemble bacterial wilt, so I modelled ageing as its own class and measured how often it is mistaken for disease, rather than reporting accuracy alone.',
-    'I trained as an electrical and computer engineer and I build software as well: React and Django applications for a restaurant and for university internships. I like problems where a model has to fit inside a real workflow, with real users and constraints.',
+    'At the Ethiopian Artificial Intelligence Institute I build vision systems for plant disease and crop and animal growth. I set the labelling rules, check the data and keep every experiment reproducible.',
+    'I also build the apps around models: React, Django and FastAPI, shipped to real users.',
   ],
   focus: [
-    ['Computer vision', 'Image classification, transfer learning, lightweight models for mobile and edge hardware.'],
-    ['Evaluation rigour', 'Leakage-resistant splits, k-fold protocols, per-class error analysis, honest baselines.'],
-    ['Dataset engineering', 'Taxonomies, labelling guidelines, annotation QA, duplicate and leakage audits.'],
-    ['Applied software', 'React, Django and FastAPI applications that put models and data to work.'],
+    ['Computer vision', 'Classification, transfer learning, models small enough for phones.'],
+    ['Honest evaluation', 'Leak-free splits, k-fold runs, per-class errors.'],
+    ['Data quality', 'Labelling rules, annotation QA, duplicate audits.'],
+    ['Applied software', 'Web apps that put models and data to work.'],
   ] as const,
 };
 
@@ -47,19 +45,17 @@ export type ModelResult = {
 
 export const enset = {
   title: 'Senescence-Aware Enset Disease Classification Using Deep Learning Models',
-  status: 'Unpublished manuscript · in preparation',
-  role: 'Second and corresponding author, six-author team at the Ethiopian Artificial Intelligence Institute',
+  status: 'Unpublished manuscript',
+  role: 'Second and corresponding author, EAII team of six',
   period: '2025 – present',
-  question:
-    'Can a lightweight classifier tell bacterial wilt apart from the natural yellowing of ageing enset leaves, instead of treating every discoloured leaf as diseased?',
-  why: 'Enset (Ensete ventricosum) is a staple food for roughly 20 million Ethiopians, and bacterial wilt is one of the main threats to it. Earlier image classifiers framed the task as healthy versus diseased. Senescent leaves also discolour, so a binary model has nowhere to put them except one of those two classes.',
-  contribution:
-    'The contribution is not a third label for its own sake. Natural senescence is treated as a confounding condition: it gets its own class, and the evaluation measures directly how often an aged leaf triggers a false bacterial-wilt alert.',
+  question: 'Is that yellow leaf sick, or just old?',
+  why: 'Enset feeds about 20 million Ethiopians, and bacterial wilt threatens it. Old leaves also turn yellow, so a sick-or-healthy model raises false alarms.',
+  contribution: 'So ageing gets its own class, and we measure exactly how often an old leaf is mistaken for disease.',
   dataset: {
     total: 7545,
     region: 'Gurage Zone, Ethiopia',
-    devices: 'Two consumer mobile devices, natural light, uncontrolled backgrounds',
-    labelling: 'Visual assessment of field symptoms with guidance from a plant researcher',
+    devices: 'Phone cameras, natural light, real farms',
+    labelling: 'Labelled from field symptoms with a plant researcher',
     classes: [
       { key: 'healthy', label: 'Healthy', count: 2607, share: 34.55 },
       { key: 'wilt', label: 'Bacterial wilt', count: 2476, share: 32.82 },
@@ -67,12 +63,12 @@ export const enset = {
     ],
   },
   protocol: [
-    ['Plant-wise partitioning', 'Every image of the same plant goes to the same partition, so repeated views of one specimen cannot sit on both sides of the split.'],
-    ['Held-out test set', 'Used only for final evaluation. Never for fitting, early stopping or hyperparameter search.'],
-    ['Five-fold training', 'Stratified folds within the development data. Each fold-trained model is scored on the same held-out test set, and results are reported as mean ± SD.'],
-    ['Bayesian search', 'Learning rate, dense units, dropout, L2 strength and MobileNet width, searched on training and validation data only.'],
-    ['Augmentation in training only', 'Rotation ±40°, shifts ±30%, shear, zoom and brightness 0.7–1.3, and flips, applied on the fly to training batches only.'],
-    ['Same head for every backbone', 'Global average pooling, dense + L2, batch norm, ReLU, dropout, softmax. SGD with Nesterov momentum, at 320 × 320 input.'],
+    ['Split by plant', 'Photos of one plant never cross the split.'],
+    ['Untouched test set', 'Used once, for the final score.'],
+    ['Five folds', 'Five models per backbone, reported as mean ± SD.'],
+    ['Bayesian search', 'Tuned on training data only.'],
+    ['Train-only augmentation', 'Rotations, shifts, zoom, brightness, flips.'],
+    ['Same head everywhere', 'A fair comparison across five backbones.'],
   ] as const,
   models: [
     { name: 'MobileNetV3-Small', folds: [94.88, 95.69, 96.29, 95.49, 94.74], mean: 95.42, sd: 0.63, f1: 95.42, params: 695803 },
@@ -92,21 +88,21 @@ export const enset = {
   },
   binary: { mean: 97.08, sd: 0.9 },
   findings: [
-    'MobileNetV3-Small had the highest mean test accuracy (95.42 ± 0.63%) and the smallest spread across folds. It is also the smallest model tested, at 695,803 parameters.',
-    'Larger backbones did not help under the same protocol. ResNet50, with 34× more parameters, averaged 86.25%.',
-    'In the best MobileNetV3-Small fold, 7 of 510 aged leaves were classified as bacterial wilt, an aged-to-wilt false-alert rate of 1.37%.',
-    'A binary variant (Healthy + Aged merged) scored 97.08 ± 0.90%, but it solves an easier problem. The two accuracies are not a ranking of diagnostic quality.',
+    'Smallest model, best score: MobileNetV3-Small hit 95.42 ± 0.63% with 695,803 parameters.',
+    'Bigger did not help: ResNet50 is 34× larger and scored 86.25%.',
+    'Only 7 of 510 old leaves were flagged as wilt (1.37%).',
+    'A two-class model scores 97.08%, but it solves an easier problem.',
   ],
   limits: [
-    'Data comes from a single region and two capture devices. Wider collection across locations, varieties and severity stages is still needed.',
-    'Showing that the Aged class causally reduces false alerts requires a paired image-level comparison against the binary model. The manuscript states this rather than claiming it.',
-    'On-device latency and memory have not been measured yet. The resume documents TensorFlow Lite quantization as preparation for mobile use.',
+    'One region, two phones. More farms and varieties next.',
+    'Proving the Aged class cuts false alarms needs a paired test against the two-class model.',
+    'On-device speed and memory are not measured yet.',
   ],
   // Earlier work on the same data, documented in the owner's research resume: an audit that found
   // duplicate images crossing split boundaries and led to the leakage-resistant protocol above.
   audit: {
-    title: 'Why the protocol is strict',
-    text: 'An earlier experimental series produced evaluation scores that were higher than expected. I built a leakage audit to find out why. It combined exact hashing, perceptual hashing, deep image embeddings with cosine similarity, and clustering, and it found exact and near-duplicate images on both sides of the split. The evaluation was rebuilt around plant-level separation, and only results from the rebuilt protocol are reported here.',
+    title: 'Why so strict?',
+    text: 'Early scores looked too good. A leakage audit found duplicate photos on both sides of the split, so I rebuilt the evaluation around plants. Only the rebuilt numbers are shown.',
     methods: ['Exact hashing', 'Perceptual hashing', 'CNN embeddings', 'Cosine similarity', 'Clustering'],
   },
 };
@@ -138,9 +134,8 @@ export const projects: Project[] = [
     name: 'Hope Lounge',
     kind: 'Client platform · QR ordering',
     period: 'Dec 2025 – Apr 2026',
-    role: 'Team lead and frontend developer, built with a collaborator',
-    summary:
-      'A QR-based ordering and café-management platform: table-side menu in three languages, order tracking, payments, billiards sessions and a staff dashboard.',
+    role: 'Team lead and frontend developer, with one collaborator',
+    summary: 'Scan, order, pay. A three-language QR menu and café dashboard.',
     stack: ['React', 'Vite', 'Django REST Framework', 'PostgreSQL', 'Keycloak (OIDC)', 'Chapa payments', 'Cloudinary', 'i18next', 'Docker'],
     diagram: {
       lanes: ['Guests & staff', 'React SPA', 'Django REST API', 'Services'],
@@ -152,27 +147,26 @@ export const projects: Project[] = [
       ],
     },
     sections: [
-      { heading: 'Problem', body: ['Orders at Hope Lounge were taken by hand at each table. Guests could not browse the menu in their own language, and staff had no shared view of what was ordered, what was in the kitchen and what had been paid.'] },
-      { heading: 'Approach', body: ['Put a QR code on every table that opens a mobile menu with no app install. Every order goes through one API so the kitchen, the floor and the admin see the same state.'] },
-      { heading: 'Architecture', body: ['A React and Vite single-page app talks to a Django REST Framework backend split into core, menu and order apps. PostgreSQL stores the data, Cloudinary serves media, Keycloak handles staff sign-in through OIDC with role-based access, and Chapa processes local payment methods. The stack ships with Docker Compose.'] },
-      { heading: 'Implementation', body: ['Category and item names are stored in English, Amharic and Afaan Oromo, and i18next switches the interface language. Each order records a status log of who changed it and when, for auditing. A dedicated queue service handles carambole billiards bookings in package and quick-play modes, and item availability follows stock levels.'] },
-      { heading: 'Challenges', body: ['Keeping prices, stock and availability consistent while guests, kitchen staff and admins all act on the same orders. Supporting three languages without duplicating the menu for each one. Reconciling orders with payments that complete outside the app.'] },
-      { heading: 'Results', body: ['The platform was delivered to Hope Lounge and digitised its table-ordering workflow. The resume reports that this reduced manual order-taking staffing needs by about 50%. That is the owner\'s figure; this site has not measured it independently.'] },
-      { heading: 'Lessons', body: ['Hospitality software is mostly about state. Getting the order lifecycle and its audit trail right mattered more than any individual screen.'] },
+      { heading: 'Problem', body: ['Orders were taken by hand. Nobody shared one view of the orders, the kitchen and the bill.'] },
+      { heading: 'Approach', body: ['A QR code on every table. One API, so kitchen, floor and admin see the same order.'] },
+      { heading: 'Architecture', body: ['React and Vite front end, Django REST back end, PostgreSQL. Keycloak for staff logins, Chapa for payments, Cloudinary for images, Docker to ship.'] },
+      { heading: 'Implementation', body: ['Menus in English, Amharic and Afaan Oromo. Every order change is logged. Billiards bookings run in a queue, and stock drives what is available.'] },
+      { heading: 'Challenges', body: ['Keeping stock and prices right while guests, kitchen and admins all touch the same order.'] },
+      { heading: 'Results', body: ['Delivered to the client. Per the resume, about 50% less manual order-taking (the owner\'s own figure).'] },
+      { heading: 'Lessons', body: ['Restaurant software is about state. Get the order lifecycle right first.'] },
     ],
-    outcome: 'Delivered to the client. The source repository is private and the hosted site is offline, so neither is linked.',
+    outcome: 'Delivered. The code is private and the hosted site is offline.',
     links: [],
-    evidence: 'Resume and the project\'s own system documentation (March 2026). Repository is private.',
+    evidence: 'Resume and project documentation.',
     featured: true,
   },
   {
     slug: 'internship-hub',
     name: 'Student Internship Monitoring System',
-    kind: 'University platform · multi-role workflow',
+    kind: 'University platform · multi-role',
     period: 'Oct 2024 – Jun 2025',
-    role: 'System design lead and frontend developer, built with a collaborator',
-    summary:
-      'A multi-role workspace where students, advisors, industry supervisors and department heads track placements, daily logs, evaluations and grading in one place.',
+    role: 'System design lead and frontend developer, with one collaborator',
+    summary: 'One place for students, advisors and supervisors to track every internship.',
     stack: ['Python', 'Django', 'Django Channels', 'React', 'SQL databases'],
     diagram: {
       lanes: ['Roles', 'Workflows', 'Django'],
@@ -183,15 +177,15 @@ export const projects: Project[] = [
       ],
     },
     sections: [
-      { heading: 'Problem', body: ['Internship progress was spread across paper logbooks, email and separate company reports, so advisors and supervisors had no shared picture of each student.'] },
-      { heading: 'Approach', body: ['One system with a separate workspace for each role, connected by the placement record that links the student, the company and the academic side.'] },
-      { heading: 'Architecture', body: ['A Django application with role-specific views and permission checks, Django Channels for real-time messaging, and relational storage for placements, logs and evaluations.'] },
-      { heading: 'Implementation', body: ['Placement tracking, daily activity logs, supervisor evaluation and grading reports. Per the resume, the team also built a chatbot for frequently asked questions and a ratings-based recommendation component for student–company matching.'] },
-      { heading: 'Challenges', body: ['Five roles with overlapping but different permissions. A later maintenance pass made approval and rejection POST-only and restricted them to the owning company. It added environment-based configuration and repaired the ASGI setup.'] },
-      { heading: 'Results', body: ['A working multi-role prototype with a public repository. In the maintained local edition, eight regression tests and Django\'s system checks passed. That edition is not yet published.'] },
-      { heading: 'Lessons', body: ['Multi-role systems fail at the permission boundaries. They need tests on exactly those boundaries, not just on the happy path.'] },
+      { heading: 'Problem', body: ['Progress lived in paper logbooks and email. Advisors and supervisors were working blind.'] },
+      { heading: 'Approach', body: ['A workspace per role, all tied to one placement record.'] },
+      { heading: 'Architecture', body: ['Django with role-based views, Channels for live chat and a SQL database.'] },
+      { heading: 'Implementation', body: ['Placements, daily logs, evaluations and grading. Per the resume, also an FAQ chatbot and a ratings-based matcher.'] },
+      { heading: 'Challenges', body: ['Five roles with overlapping permissions. A later pass locked approvals to POST and to the owning company.'] },
+      { heading: 'Results', body: ['A working, public prototype. Eight regression tests pass in the maintained copy.'] },
+      { heading: 'Lessons', body: ['Multi-role apps break at the permission edges. Test those first.'] },
     ],
-    outcome: 'Public implementation. The AI features described in the resume could not be confirmed in the public source.',
+    outcome: 'Public code. The AI features are not visible in the public repository.',
     links: [{ label: 'Repository', href: 'https://github.com/gashahun21/Internship-Management-System' }],
     evidence: 'Resume and the public repository.',
     featured: true,
@@ -199,25 +193,25 @@ export const projects: Project[] = [
   {
     slug: 'saasforge',
     name: 'SaaSForge',
-    kind: 'Reference implementation · multi-tenant API',
+    kind: 'Reference build · multi-tenant API',
     role: 'Repository owner',
-    summary: 'A multi-tenant B2B foundation with organisation-scoped data, JWT and API-key authentication, role checks and cross-tenant tests.',
+    summary: 'Many companies, one backend, zero data leaks between them.',
     stack: ['FastAPI', 'SQLAlchemy (async)', 'PostgreSQL', 'Redis', 'Next.js', 'Docker', 'GitHub Actions'],
     diagram: {
       lanes: ['Client', 'API', 'Data'],
       nodes: [['Next.js app', 'API key clients'], ['JWT / API key', 'Org resolution', 'Role checks'], ['PostgreSQL (org-scoped rows)', 'Redis']],
     },
     sections: [
-      { heading: 'Problem', body: ['A shared B2B backend has to resolve which organisation each request belongs to and never return another organisation\'s rows.'] },
-      { heading: 'Architecture', body: ['FastAPI services over async SQLAlchemy and PostgreSQL, with Alembic migrations and Redis in the stack. Each request resolves its organisation from an organisation slug (with JWT) or from an API key, then membership and role checks run.'] },
-      { heading: 'Results', body: ['The repository includes API tests, cross-tenant isolation tests and CI workflows. No production deployment, load test or security audit is claimed.'] },
+      { heading: 'Problem', body: ['Every request must hit the right organisation, and only that one.'] },
+      { heading: 'Architecture', body: ['FastAPI on async SQLAlchemy and PostgreSQL. Each request resolves its organisation, then checks membership and role.'] },
+      { heading: 'Results', body: ['API tests, cross-tenant tests and CI included. No production use is claimed.'] },
     ],
-    outcome: 'Public reference implementation.',
+    outcome: 'Public reference build.',
     links: [
       { label: 'Repository', href: 'https://github.com/gashahundemise21/saasforge' },
       { label: 'Architecture notes', href: 'https://github.com/gashahundemise21/saasforge/blob/HEAD/docs/architecture.md' },
     ],
-    evidence: 'Public repository and its architecture documentation.',
+    evidence: 'Public repository.',
     featured: false,
   },
   {
@@ -225,14 +219,14 @@ export const projects: Project[] = [
     name: 'TaskFlow',
     kind: 'Frontend · typed components',
     role: 'Repository owner',
-    summary: 'A Kanban board in React and TypeScript with task editing, search, status filters, confirmation dialogs and Vitest component tests.',
+    summary: 'A clean, typed Kanban board with search, filters and tests.',
     stack: ['React', 'TypeScript', 'Vite', 'Vitest'],
     diagram: { lanes: ['Board'], nodes: [['To do', 'In progress', 'Done']] },
     sections: [
-      { heading: 'Problem', body: ['Everyday task tracking needs clear states and predictable controls without the weight of a full project tool.'] },
-      { heading: 'Implementation', body: ['Column, card, editor and filter components communicate through typed props and callbacks. Component tests cover task cards and the search and filter controls.'] },
+      { heading: 'Problem', body: ['Task tracking without the weight of a full project tool.'] },
+      { heading: 'Implementation', body: ['Typed React components and Vitest tests for cards, search and filters.'] },
     ],
-    outcome: 'Public implementation. No hosted demo.',
+    outcome: 'Public code. No hosted demo.',
     links: [{ label: 'Repository', href: 'https://github.com/gashahundemise21/task-board-app' }],
     evidence: 'Public repository.',
     featured: false,
@@ -249,11 +243,11 @@ export const experience = [
     period: 'Jul 2025 – Present',
     current: true,
     points: [
-      'Research and develop computer vision systems for plant disease classification and for crop and animal growth monitoring.',
-      'Build and manage image annotation pipelines for classification and segmentation.',
-      'Define class taxonomies, labelling guidelines, edge-case rules and QA procedures to keep annotation consistent.',
-      'Preprocess datasets, correct labels and convert between YOLO, COCO and Pascal VOC so that model development and evaluation are reproducible.',
-      'Co-author and corresponding author of the senescence-aware enset classification study.',
+      'Build vision systems for plant disease and crop and animal growth.',
+      'Run annotation pipelines for classification and segmentation.',
+      'Write labelling rules and QA checks that keep data consistent.',
+      'Clean, fix and convert datasets across YOLO, COCO and Pascal VOC.',
+      'Corresponding author of the senescence-aware enset study.',
     ],
     tools: ['Python', 'TensorFlow / Keras', 'OpenCV', 'YOLO · COCO · VOC'],
   },
@@ -264,21 +258,14 @@ export const experience = [
     period: '2024 – 2025',
     current: false,
     points: [
-      'Supported university-wide data communication and network-security operations through infrastructure monitoring and troubleshooting.',
-      'Documented operational and security procedures and helped diagnose connectivity and system issues.',
+      'Monitored and troubleshot the university network and its security.',
+      'Documented operations and security procedures.',
     ],
     tools: ['Networking', 'Linux', 'Documentation'],
   },
 ];
 
 export const education = [
-  {
-    degree: 'PhD, AI Engineering',
-    school: 'Addis Ababa University',
-    period: 'In progress',
-    status: 'ongoing' as const,
-    note: 'Research interests: computer vision, machine learning and robust AI evaluation.',
-  },
   {
     degree: 'B.Sc., Electrical and Computer Engineering',
     school: 'Addis Ababa Science and Technology University (AASTU)',
@@ -290,13 +277,13 @@ export const education = [
 
 export const certifications = [{ name: 'Deep Learning for Computer Vision', issuer: 'WorldQuant University' }];
 
-export const languages = ['Afaan Oromoo (native)', 'Amharic (native)', 'English (professional working)'];
+export const languages = ['Afaan Oromoo (native)', 'Amharic (native)', 'English (professional)'];
 
 export const skills: { group: string; items: string[] }[] = [
   { group: 'Languages', items: ['Python', 'C / C++', 'SQL', 'JavaScript', 'TypeScript'] },
-  { group: 'Machine learning', items: ['TensorFlow', 'Keras', 'scikit-learn', 'Transfer learning', 'Fine-tuning', 'Bayesian hyperparameter search', 'Regularisation'] },
-  { group: 'Computer vision', items: ['OpenCV', 'Image classification', 'Object detection', 'Segmentation', 'Grad-CAM', 'TensorFlow Lite', 'Quantization'] },
-  { group: 'Data & evaluation', items: ['NumPy', 'Pandas', 'Stratified k-fold', 'Leakage audits', 'Perceptual hashing', 'Confusion analysis', 'Annotation QA'] },
-  { group: 'Applications & APIs', items: ['React', 'Next.js', 'Django', 'Django REST Framework', 'FastAPI', 'REST APIs'] },
-  { group: 'Data stores & infrastructure', items: ['PostgreSQL', 'MySQL', 'Docker', 'Linux', 'Git / GitHub', 'CI/CD'] },
+  { group: 'Machine learning', items: ['TensorFlow', 'Keras', 'scikit-learn', 'Transfer learning', 'Fine-tuning', 'Bayesian tuning', 'Regularisation'] },
+  { group: 'Computer vision', items: ['OpenCV', 'Classification', 'Detection', 'Segmentation', 'Grad-CAM', 'TensorFlow Lite', 'Quantization'] },
+  { group: 'Data & evaluation', items: ['NumPy', 'Pandas', 'Stratified k-fold', 'Leakage audits', 'Perceptual hashing', 'Annotation QA'] },
+  { group: 'Apps & APIs', items: ['React', 'Next.js', 'Django', 'Django REST Framework', 'FastAPI', 'REST APIs'] },
+  { group: 'Data & infrastructure', items: ['PostgreSQL', 'MySQL', 'Docker', 'Linux', 'Git / GitHub', 'CI/CD'] },
 ];

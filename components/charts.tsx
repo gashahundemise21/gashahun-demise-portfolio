@@ -48,8 +48,7 @@ export function ConfusionMatrix({ compact = false }: { compact?: boolean }) {
         </tbody>
       </table>
       <figcaption>
-        MobileNetV3-Small, best fold. {correct} of {total} test images correct ({pct((correct / total) * 100)}).
-        The marked cell is the error this study targets: <strong>7 of 510</strong> aged leaves flagged as wilt (1.37%).
+        Best MobileNetV3-Small model: {correct} of {total} right ({pct((correct / total) * 100)}). Only <strong>7 of 510</strong> old leaves were called wilt.
       </figcaption>
     </figure>
   );
@@ -64,7 +63,7 @@ export function ModelComparison() {
     <figure className="figure models">
       <div className="figure-head">
         <span>Fig. 2</span>
-        <span>Test accuracy by architecture · five fold-trained models each</span>
+        <span>Test accuracy by model</span>
       </div>
       <div className="models-grid" role="table" aria-label="Held-out test accuracy and parameter count per architecture">
         <div className="models-row models-header" role="row">
@@ -93,8 +92,7 @@ export function ModelComparison() {
         ))}
       </div>
       <figcaption>
-        Dots are the five fold-trained models, the bar is ±1 SD and the vertical mark is the mean, all scored on the same plant-wise held-out test set.
-        The smallest network was the most accurate and the most stable.
+        Dots: five models each. Bar: ±1 SD. Mark: mean. The smallest network won.
       </figcaption>
     </figure>
   );
