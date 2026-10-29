@@ -32,7 +32,7 @@ export function Header() {
   return (
     <header className="header">
       <div className="header-inner wrap">
-        <Link className="wordmark" href="/" aria-label="Gashahun Demise, home">Gashahun</Link>
+        <Link className="wordmark" href="/" aria-label="Gashahun Demise, home">gdemise</Link>
         <button
           ref={menuRef}
           className="menu-toggle"
