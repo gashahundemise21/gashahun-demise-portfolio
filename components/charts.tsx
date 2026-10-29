@@ -21,7 +21,7 @@ export function ConfusionMatrix({ compact = false }: { compact?: boolean }) {
         </caption>
         <thead>
           <tr>
-            <th scope="col"><span className="cm-axis">true ↓ / predicted →</span></th>
+            <th scope="col"><span className="cm-axis">true ↓ · pred →</span></th>
             {labels.map(l => <th scope="col" key={l}>{l}</th>)}
           </tr>
         </thead>
