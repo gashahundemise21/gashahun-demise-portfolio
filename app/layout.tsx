@@ -1,9 +1,13 @@
 import type { Metadata, Viewport } from 'next';
+import { JetBrains_Mono } from 'next/font/google';
 import { SiteAnalytics } from '@/components/SiteAnalytics';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { siteUrl } from '@/lib/site';
 import './globals.css';
+
+// Self-hosted at build time by next/font; no request to Google from visitors' browsers.
+const mono = JetBrains_Mono({ subsets: ['latin'], weight: ['400', '500', '700'], variable: '--font-mono', display: 'swap' });
 
 const description =
   'Machine learning engineer and computer vision researcher at the Ethiopian Artificial Intelligence Institute. Senescence-aware enset disease classification, leakage-resistant evaluation, and applied software.';
@@ -24,20 +28,11 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
-export const viewport: Viewport = {
-  themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#f4f1ea' },
-    { media: '(prefers-color-scheme: dark)', color: '#111413' },
-  ],
-};
+export const viewport: Viewport = { themeColor: '#0d0f12', colorScheme: 'dark' };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <head>
-        <link rel="preload" href="/fonts/manrope.woff2" as="font" type="font/woff2" crossOrigin="" />
-        <link rel="preload" href="/fonts/serif.woff2" as="font" type="font/woff2" crossOrigin="" />
-      </head>
+    <html lang="en" className={mono.variable}>
       <body>
         <a className="skip" href="#main">Skip to content</a>
         <Header />

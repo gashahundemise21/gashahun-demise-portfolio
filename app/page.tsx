@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import { ArrowRight, ArrowUpRight, Mail } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, Briefcase, GraduationCap, Mail, MapPin } from 'lucide-react';
+import { Github, Linkedin } from '@/components/BrandIcons';
 import { about, certifications, education, enset, experience, languages, profile, projects, skills } from '@/lib/content';
 import { ConfusionMatrix, ModelComparison } from '@/components/charts';
 import { SystemDiagram } from '@/components/SystemDiagram';
@@ -15,6 +16,12 @@ const facts = [
   [lead.mean.toFixed(2) + '%', `mean test accuracy, ±${lead.sd.toFixed(2)} across five folds`],
   ['1.37%', 'aged leaves misread as wilt (best fold)'],
   [(lead.params / 1e3).toFixed(0) + 'k', 'parameters, smallest of five backbones'],
+] as const;
+
+const highlights = [
+  ['Computer vision research', 'Plant disease classification and growth monitoring at EAII since July 2025'],
+  ['Evaluation rigour', 'Plant-wise splits, five-fold protocols and leakage audits before any number is reported'],
+  ['Full stack', 'React, Django and FastAPI applications, one delivered to a restaurant client'],
 ] as const;
 
 const personSchema = {
@@ -33,7 +40,7 @@ const personSchema = {
 function SectionHead({ index, label, title, children }: { index: string; label: string; title: React.ReactNode; children?: React.ReactNode }) {
   return (
     <div className="section-head">
-      <p className="eyebrow"><span className="idx">{index}</span>{label}</p>
+      <p className="eyebrow"><span className="idx">{index}</span>{'// ' + label}</p>
       <h2>{title}</h2>
       {children}
     </div>
@@ -47,47 +54,62 @@ export default function Home() {
     <main id="main">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }} />
 
-      <section className="hero wrap" aria-labelledby="hero-title">
-        <div className="hero-copy">
-          <p className="eyebrow">{profile.headline}</p>
-          <h1 id="hero-title">{profile.name}</h1>
-          <p className="statement">
-            I build computer vision models that hold up under <em>honest evaluation</em>, and the software that puts them to work.
-          </p>
-          <p className="intro">
-            Computer vision researcher at the Ethiopian Artificial Intelligence Institute and PhD student in AI Engineering at Addis Ababa University.
-            I work on the whole path, from field images and labelling rules to leakage-resistant splits, model comparison and the applications around them.
-          </p>
-          <div className="actions">
-            <Link className="button primary" href="/research">Read the research <ArrowRight size={16} aria-hidden="true" /></Link>
-            <a className="button secondary" href="#work">Selected work</a>
-            <ResumeLink className="button ghost" />
+      <section className="hero" aria-labelledby="hero-title">
+        <div className="wrap hero-inner">
+          <div className="hero-copy">
+            <p className="eyebrow">{profile.headline}</p>
+            <h1 id="hero-title">{profile.name}</h1>
+            <p className="tagline">Computer vision that survives honest evaluation</p>
+            <p className="intro">
+              Researcher at the Ethiopian Artificial Intelligence Institute and PhD student in AI Engineering at Addis Ababa University.
+              I take vision problems from field images and labelling rules to leakage-resistant evaluation, and build the software around the models.
+            </p>
+            <ul className="highlights" aria-label="Highlights">
+              {highlights.map(([title, text]) => (
+                <li key={title}><span className="hl-title">{title}</span><span>{text}</span></li>
+              ))}
+            </ul>
+            <div className="actions">
+              <a className="button primary" href="#contact">Contact me</a>
+              <a className="button secondary" href="#work">View projects</a>
+              <Link className="button secondary" href="/research">Read the research <ArrowRight size={15} aria-hidden="true" /></Link>
+            </div>
+            <div className="pills">
+              <TrackedLink event="github" className="pill" href={profile.github} target="_blank" rel="noopener noreferrer"><Github size={14} aria-hidden="true" />GitHub</TrackedLink>
+              <TrackedLink event="linkedin" className="pill" href={profile.linkedin} target="_blank" rel="noopener noreferrer"><Linkedin size={14} aria-hidden="true" />LinkedIn</TrackedLink>
+              <TrackedLink event="email" className="pill" href={'mailto:' + profile.email}><Mail size={14} aria-hidden="true" />Email</TrackedLink>
+              <ResumeLink className="pill" />
+            </div>
           </div>
-          <p className="hero-links">
-            <TrackedLink event="github" href={profile.github} target="_blank" rel="noopener noreferrer">GitHub <ArrowUpRight size={14} aria-hidden="true" /></TrackedLink>
-            <TrackedLink event="linkedin" href={profile.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn <ArrowUpRight size={14} aria-hidden="true" /></TrackedLink>
-            <span>{profile.location}</span>
-          </p>
-        </div>
-        <div className="hero-figure">
-          <ConfusionMatrix compact />
+          <aside className="profile-card" aria-label="Profile details">
+            <dl>
+              <div><dt><MapPin size={13} aria-hidden="true" />Location</dt><dd>{profile.location}</dd></div>
+              <div><dt><Briefcase size={13} aria-hidden="true" />Currently</dt><dd>Computer Vision Researcher, EAII</dd></div>
+              <div><dt><GraduationCap size={13} aria-hidden="true" />Studying</dt><dd>PhD, AI Engineering · Addis Ababa University</dd></div>
+              <div><dt><Mail size={13} aria-hidden="true" />Email</dt><dd><a href={'mailto:' + profile.email}>{profile.email}</a></dd></div>
+              <div><dt><Github size={13} aria-hidden="true" />GitHub</dt><dd><a href={profile.github} target="_blank" rel="noopener noreferrer">github.com/gashahundemise21</a></dd></div>
+            </dl>
+          </aside>
         </div>
       </section>
 
-      <section className="facts wrap" aria-label="Key results from the enset study">
-        <dl>
-          {facts.map(([value, label]) => (
-            <div key={label}>
-              <dt>{label}</dt>
-              <dd>{value}</dd>
-            </div>
-          ))}
-        </dl>
-        <p className="facts-note">Senescence-aware enset classification. {enset.status}.</p>
+      <section className="wrap facts-band" aria-label="Key results from the enset study">
+        <ConfusionMatrix compact />
+        <div className="facts">
+          <dl>
+            {facts.map(([value, label]) => (
+              <div key={label}>
+                <dt>{label}</dt>
+                <dd>{value}</dd>
+              </div>
+            ))}
+          </dl>
+          <p className="facts-note">From the senescence-aware enset study. {enset.status}.</p>
+        </div>
       </section>
 
       <section id="about" className="section wrap about">
-        <SectionHead index="01" label="About" title={<>Research that starts <em>before</em> the model.</>} />
+        <SectionHead index="01" label="about" title="About" />
         <div className="about-grid">
           <div className="about-text">
             <p className="lede">{about.lead}</p>
@@ -102,7 +124,7 @@ export default function Home() {
       </section>
 
       <section id="research" className="section wrap research">
-        <SectionHead index="02" label="Research" title={<>Telling disease apart from <em>age</em>.</>}>
+        <SectionHead index="02" label="research" title="Research">
           <p className="section-sub">{enset.question}</p>
         </SectionHead>
         <div className="research-grid">
@@ -121,7 +143,7 @@ export default function Home() {
       </section>
 
       <section id="work" className="section wrap work">
-        <SectionHead index="03" label="Selected work" title={<>Software built for <em>real</em> users.</>}>
+        <SectionHead index="03" label="projects" title="Projects">
           <p className="section-sub">Delivered and public projects. Each case study says what can and cannot be verified.</p>
         </SectionHead>
         <div className="work-featured">
@@ -157,7 +179,7 @@ export default function Home() {
       </section>
 
       <section id="experience" className="section wrap experience">
-        <SectionHead index="04" label="Experience" title={<>Where I <em>work</em>.</>} />
+        <SectionHead index="04" label="experience" title="Experience" />
         <ol className="timeline">
           {experience.map(job => (
             <li key={job.role} className={job.current ? 'current' : undefined}>
@@ -177,7 +199,7 @@ export default function Home() {
       </section>
 
       <section id="skills" className="section wrap skills">
-        <SectionHead index="05" label="Technical expertise" title={<>Tools I have <em>used</em> in this work.</>}>
+        <SectionHead index="05" label="skills" title="Technical skills">
           <p className="section-sub">Listed only where the resume, the research or the projects above back them up.</p>
         </SectionHead>
         <div className="skill-grid">
@@ -191,7 +213,7 @@ export default function Home() {
       </section>
 
       <section id="education" className="section wrap education">
-        <SectionHead index="06" label="Education" title={<>Engineering, then <em>AI</em>.</>} />
+        <SectionHead index="06" label="education" title="Education" />
         <div className="edu-grid">
           {education.map(e => (
             <article key={e.degree} className={'edu ' + e.status}>
@@ -211,7 +233,9 @@ export default function Home() {
       </section>
 
       <section id="contact" className="section wrap contact">
-        <SectionHead index="07" label="Contact" title={<>Open to ML, computer vision and <em>research engineering</em> roles.</>} />
+        <SectionHead index="07" label="contact" title="Get in touch">
+          <p className="section-sub">Open to machine learning, computer vision and research engineering roles, and to research collaboration.</p>
+        </SectionHead>
         <div className="contact-grid">
           <TrackedLink event="email" className="contact-email" href={'mailto:' + profile.email}>
             <Mail size={22} aria-hidden="true" />{profile.email}
@@ -220,8 +244,8 @@ export default function Home() {
             <p>Email is the most direct way to reach me. For a role or a research collaboration, a short note about the problem you are working on helps me give a useful reply.</p>
             <div className="actions">
               <ResumeLink className="button primary" />
-              <TrackedLink event="github" className="button secondary" href={profile.github} target="_blank" rel="noopener noreferrer">GitHub <ArrowUpRight size={15} aria-hidden="true" /></TrackedLink>
-              <TrackedLink event="linkedin" className="button secondary" href={profile.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn <ArrowUpRight size={15} aria-hidden="true" /></TrackedLink>
+              <TrackedLink event="github" className="button secondary" href={profile.github} target="_blank" rel="noopener noreferrer"><Github size={15} aria-hidden="true" />GitHub</TrackedLink>
+              <TrackedLink event="linkedin" className="button secondary" href={profile.linkedin} target="_blank" rel="noopener noreferrer"><Linkedin size={15} aria-hidden="true" />LinkedIn</TrackedLink>
             </div>
           </div>
         </div>

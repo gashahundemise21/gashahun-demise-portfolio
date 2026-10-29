@@ -4,11 +4,12 @@ import { useEffect, useRef, useState } from 'react';
 import { Menu, X } from 'lucide-react';
 
 const links = [
-  ['About', '/#about'],
+  ['Overview', '/#about'],
   ['Research', '/research'],
-  ['Work', '/#work'],
+  ['Projects', '/#work'],
   ['Experience', '/#experience'],
   ['Skills', '/#skills'],
+  ['Education', '/#education'],
   ['Contact', '/#contact'],
 ] as const;
 
@@ -31,10 +32,7 @@ export function Header() {
   return (
     <header className="header">
       <div className="header-inner wrap">
-        <Link className="wordmark" href="/" aria-label="Gashahun Demise, home">
-          <span className="mark" aria-hidden="true">GD</span>
-          <span className="wordmark-name">Gashahun Demise</span>
-        </Link>
+        <Link className="wordmark" href="/" aria-label="Gashahun Demise, home">Gashahun</Link>
         <button
           ref={menuRef}
           className="menu-toggle"
