@@ -12,7 +12,7 @@ export default function Image() {
         <div style={{ fontSize: 22, letterSpacing: 3, color: '#0b7a61', marginBottom: 34 }}>MACHINE LEARNING · COMPUTER VISION</div>
         <div style={{ fontSize: 92, lineHeight: 1.02, letterSpacing: -3 }}>Gashahun Demise</div>
         <div style={{ fontSize: 32, color: '#8f5b00', marginTop: 30, lineHeight: 1.35 }}>
-          Computer vision that survives honest evaluation.
+          Building reliable computer vision and machine learning systems.
         </div>
         <div style={{ fontSize: 20, color: '#5d6974', marginTop: 48 }}>Ethiopian Artificial Intelligence Institute · Addis Ababa</div>
       </div>

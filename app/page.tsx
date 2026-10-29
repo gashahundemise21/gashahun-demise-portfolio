@@ -11,9 +11,9 @@ import { siteUrl } from '@/lib/site';
 export const metadata = { alternates: { canonical: '/' } };
 
 const highlights = [
-  ['Vision research', 'Plant disease and growth models at EAII.'],
-  ['Honest numbers', 'Leak-free splits before any score.'],
-  ['Full stack', 'React and Django apps, shipped.'],
+  ['Computer vision', 'Image classification and analysis for agriculture.'],
+  ['Machine learning', 'Careful data preparation and reliable model evaluation.'],
+  ['Software engineering', 'Web applications built with React, Django and FastAPI.'],
 ] as const;
 
 const personSchema = {
@@ -51,8 +51,11 @@ export default function Home() {
           <div className="hero-copy">
             <p className="eyebrow">{profile.headline}</p>
             <h1 id="hero-title">{profile.name}</h1>
-            <p className="tagline">Computer vision that survives honest evaluation</p>
-            <p className="intro">I teach machines to see crops, and I prove the results hold up.</p>
+            <p className="tagline">Building reliable computer vision and machine learning systems</p>
+            <p className="intro">
+              I am a computer vision researcher at the Ethiopian Artificial Intelligence Institute. I develop machine learning
+              models for real-world problems and the software that brings them to users.
+            </p>
             <ul className="highlights" aria-label="Highlights">
               {highlights.map(([title, text]) => (
                 <li key={title}><span className="hl-title">{title}</span><span>{text}</span></li>
@@ -61,13 +64,6 @@ export default function Home() {
             <div className="actions">
               <a className="button primary" href="#contact">Contact me</a>
               <a className="button secondary" href="#work">View projects</a>
-              <SoonButton className="button secondary">Read the research <ArrowRight size={15} aria-hidden="true" /></SoonButton>
-            </div>
-            <div className="pills">
-              <TrackedLink event="github" className="pill" href={profile.github} target="_blank" rel="noopener noreferrer"><Github size={14} aria-hidden="true" />GitHub</TrackedLink>
-              <TrackedLink event="linkedin" className="pill" href={profile.linkedin} target="_blank" rel="noopener noreferrer"><Linkedin size={14} aria-hidden="true" />LinkedIn</TrackedLink>
-              <TrackedLink event="email" className="pill" href={'mailto:' + profile.email}><Mail size={14} aria-hidden="true" />Email</TrackedLink>
-              <ResumeLink className="pill" />
             </div>
           </div>
           <aside className="profile-card" aria-label="Profile details">
