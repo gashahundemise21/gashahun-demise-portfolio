@@ -48,7 +48,7 @@ Browser QA: start the production server, set `PORTFOLIO_QA_OUTPUT` to an existin
 
 ## Published resources
 
-- Production: https://gashahun-demise-portfolio.vercel.app
+- Production: https://gashahundemise.vercel.app (also served at https://gashahun-demise-portfolio.vercel.app)
 - GitHub: https://github.com/gashahundemise21/gashahun-demise-portfolio
 - Vercel dashboard: https://vercel.com/gashahundemise21/gashahun-demise-portfolio
 - Analytics: https://vercel.com/gashahundemise21/gashahun-demise-portfolio/analytics
