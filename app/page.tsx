@@ -10,14 +10,6 @@ import { siteUrl } from '@/lib/site';
 
 export const metadata = { alternates: { canonical: '/' } };
 
-const lead = enset.models[0];
-const facts = [
-  [enset.dataset.total.toLocaleString('en-US'), 'field photos, three classes'],
-  [lead.mean.toFixed(2) + '%', `mean accuracy, ±${lead.sd.toFixed(2)}`],
-  ['1.37%', 'old leaves mistaken for wilt'],
-  [(lead.params / 1e3).toFixed(0) + 'k', 'parameters, the smallest model'],
-] as const;
-
 const highlights = [
   ['Vision research', 'Plant disease and growth models at EAII.'],
   ['Honest numbers', 'Leak-free splits before any score.'],
@@ -87,20 +79,6 @@ export default function Home() {
               <div><dt><Linkedin size={13} aria-hidden="true" />LinkedIn</dt><dd><a href={profile.linkedin} target="_blank" rel="noopener noreferrer">linkedin.com/in/gashahun-demise</a></dd></div>
             </dl>
           </aside>
-        </div>
-      </section>
-
-      <section className="wrap facts-band" aria-label="Key results from the enset study">
-        <div className="facts">
-          <dl>
-            {facts.map(([value, label]) => (
-              <div key={label}>
-                <dt>{label}</dt>
-                <dd>{value}</dd>
-              </div>
-            ))}
-          </dl>
-          <p className="facts-note">Enset study · {enset.status}</p>
         </div>
       </section>
 

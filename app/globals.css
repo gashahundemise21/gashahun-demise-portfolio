@@ -150,17 +150,6 @@ strong { font-weight: 700; color: var(--ink); }
 .profile-card dd a:hover { color: var(--accent); }
 .inline-link { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
 
-/* ---------- Facts band (headline numbers) ---------- */
-.facts-band { display: block; }
-.facts { display: flex; flex-direction: column; justify-content: space-between; padding: 26px; }
-.facts dl { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
-.facts dl > div { display: flex; flex-direction: column-reverse; justify-content: center; gap: 10px; padding: 24px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; }
-.facts dd { font-size: clamp(1.8rem, 3.4vw, 2.7rem); font-weight: 700; line-height: 1; color: var(--accent); letter-spacing: -0.02em; }
-.facts dl > div:nth-child(3) dd { color: var(--wilt); }
-.facts dt { font-size: 0.8rem; color: var(--muted); line-height: 1.5; }
-.facts-note { margin-top: 16px; font-size: 0.72rem; color: var(--muted); }
-.facts { padding: 0; }
-
 /* ---------- Sections ---------- */
 .section { padding-top: var(--section); }
 .section-head { margin-bottom: clamp(32px, 4vw, 48px); max-width: 860px; }
@@ -381,9 +370,8 @@ strong { font-weight: 700; color: var(--ink); }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 1080px) {
-  .hero-inner, .research-grid, .about-grid, .work-item, .contact-grid, .facts-band { grid-template-columns: minmax(0, 1fr); }
+  .hero-inner, .research-grid, .about-grid, .work-item, .contact-grid { grid-template-columns: minmax(0, 1fr); }
   .profile-card { max-width: 560px; }
-  .facts dl { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .skill-grid, .edu-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .case-layout { grid-template-columns: minmax(0, 1fr); }
   .case-aside { position: static; }
@@ -414,8 +402,6 @@ strong { font-weight: 700; color: var(--ink); }
   body { font-size: 14px; }
   .header { padding-top: 10px; }
   .skill-grid, .edu-grid, .focus { grid-template-columns: minmax(0, 1fr); }
-  .facts dl { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
-  .facts dl > div { padding: 16px; }
   .profile-card { padding: 4px 20px; }
   .timeline > li, .work-item, .contact-side { padding: 20px; }
   .contact-email { padding: 20px; font-size: clamp(0.86rem, 4.2vw, 1.05rem); gap: 10px; }
