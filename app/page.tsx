@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { ArrowRight, ArrowUpRight, Briefcase, Mail, MapPin } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, Briefcase, Globe, Mail, MapPin } from 'lucide-react';
 import { Github, Linkedin } from '@/components/BrandIcons';
 import { about, certifications, education, enset, experience, languages, profile, projects, skills } from '@/lib/content';
 import { ConfusionMatrix, ModelComparison } from '@/components/charts';
@@ -85,6 +85,7 @@ export default function Home() {
               <div><dt><Mail size={13} aria-hidden="true" />Email</dt><dd><a href={'mailto:' + profile.email}>{profile.email}</a></dd></div>
               <div><dt><Github size={13} aria-hidden="true" />GitHub</dt><dd><a href={profile.github} target="_blank" rel="noopener noreferrer">github.com/gashahundemise21</a></dd></div>
               <div><dt><Linkedin size={13} aria-hidden="true" />LinkedIn</dt><dd><a href={profile.linkedin} target="_blank" rel="noopener noreferrer">linkedin.com/in/gashahun-demise</a></dd></div>
+              <div><dt><Globe size={13} aria-hidden="true" />EAII website</dt><dd><a href="https://aii.et/Home" target="_blank" rel="noopener noreferrer">aii.et</a></dd></div>
             </dl>
           </aside>
         </div>
