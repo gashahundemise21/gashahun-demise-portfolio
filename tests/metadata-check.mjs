@@ -10,6 +10,7 @@ const headers=response.headers();assert.equal(headers['x-frame-options'],'DENY')
 assert.equal(await page.title(),'Gashahun Demise | Computer Vision & Machine Learning');
 assert.equal(await page.locator('link[rel="canonical"]').getAttribute('href'),'http://localhost:3000');
 assert.equal(await page.locator('meta[property="og:image"]').count(),1);
+assert.match(await page.locator('meta[name="description"]').getAttribute('content'),/computer vision researcher/);
 assert.equal(await page.locator('script[type="application/ld+json"]').count(),1);
 assert.equal(await page.locator('script[src*="insights"]').count(),0);
 console.log('PASS: security headers, title, canonical, social image metadata, Person schema, local analytics disabled.');

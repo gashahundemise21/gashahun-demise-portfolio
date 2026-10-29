@@ -1,7 +1,37 @@
 import Link from 'next/link';
-import { ArrowUpRight } from 'lucide-react';
-import { SectionPage } from '@/components/SectionPage';
-import { ProjectFigure } from '@/components/ProjectFigure';
+import { ArrowRight } from 'lucide-react';
 import { projects } from '@/lib/content';
-export const metadata={title:'Projects',alternates:{canonical:'/projects'}};
-export default function Projects(){return <SectionPage label="SELECTED WORK" title="Research & software." description="A selection of research methods, application architecture, and collaborative systems. Each study separates implementation from the evidence available."><div className="projects">{projects.map(p=><article className="panel project" key={p.slug}><ProjectFigure kind={p.slug}/><div><p className="work-type">{p.category}</p><h2><Link href={'/projects/'+p.slug}>{p.name}</Link></h2><p>{p.summary}</p><div className="tags">{p.tech.slice(0,4).map(t=><span key={t}>{t}</span>)}</div><div className="project-links"><Link href={'/projects/'+p.slug}>Read case study <ArrowUpRight size={16}/></Link><span className="status">{p.status}</span></div></div></article>)}</div></SectionPage>}
+
+export const metadata = { title: 'Projects', alternates: { canonical: '/projects' } };
+
+export default function Projects() {
+  return (
+    <main id="main" className="case wrap">
+      <header className="case-head">
+        <p className="eyebrow">Projects</p>
+        <h1>Research and software</h1>
+        <p className="paper-dek">One research study and four software projects. Each case study separates what was built from what can be verified publicly.</p>
+      </header>
+      <ul className="index-list">
+        <li>
+          <Link href="/research">
+            <span className="more-kind">Computer vision research · 2025 – present</span>
+            <span className="more-name">Senescence-aware enset disease classification</span>
+            <span className="more-summary">Three-class leaf classification with natural ageing modelled explicitly. Five backbones evaluated on plant-wise splits.</span>
+            <ArrowRight size={18} aria-hidden="true" />
+          </Link>
+        </li>
+        {projects.map(p => (
+          <li key={p.slug}>
+            <Link href={'/projects/' + p.slug}>
+              <span className="more-kind">{p.kind}{p.period && <> · {p.period}</>}</span>
+              <span className="more-name">{p.name}</span>
+              <span className="more-summary">{p.summary}</span>
+              <ArrowRight size={18} aria-hidden="true" />
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </main>
+  );
+}

@@ -35,3 +35,12 @@ Vercel analytics is active. The real dashboard was observed with 1 visitor and 2
 - SHA-256 of source and public PDF: adb815502509d088dc344ebfe5ff2f06ba00a80646ae4a22cf819c8c5c99aa46.
 - Lint, TypeScript, two content tests and production build passed.
 - Chrome verified PDF HTTP 200, application/pdf, attachment header, expected download filename, and exact downloaded bytes. Updated mailto links, responsive layouts, mobile menu and axe checks passed.
+
+## Redesign — 29 October 2026 (local only; not deployed)
+
+- Next.js upgraded 16.4.0 → 16.4.3 (and eslint-config-next) after `npm audit --omit=dev` reported critical advisories GHSA-2464-fhr4-w9xw, GHSA-p3m5-59mp-jv5r and GHSA-673q-mjm6-r5xr for 16.0.0–16.4.0. Production audit afterwards: 0 vulnerabilities.
+- `npm run lint`, `npm run typecheck`: pass. `npm test`: 5/5 (number consistency, unpublished labelling, no private links, resume config).
+- `npm run build`: pass, 14 static routes.
+- `npm run test:browser` (installed Chrome, production server): 8 routes in light and dark with zero axe WCAG 2 A/AA / 2.1 AA violations; internal links and anchors resolve; legacy URLs return 308 to their new locations; no horizontal overflow at 360/390/768/1024 on home, research and a case study; mobile menu and Escape focus return; reduced motion; 404; skip link; OG image, sitemap, robots; no page or console errors.
+- `npm run test:metadata`: pass. Local desktop observation: CLS 0, LCP 280 ms, 16 resources (local Chrome only, not field data).
+- Screenshots reviewed at 1440 px (light and dark) and 390 px.

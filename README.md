@@ -8,7 +8,10 @@ Use Node 22+ and npm. `npm ci`, then `npm run dev`. Validation: `npm run lint`, 
 
 ## Content and evidence
 
-See AUDIT.md for sources and limitations. Two implemented software projects are featured. Enset is explicitly a research direction with a title-only public README. No benchmark results are claimed. The user-supplied resume is published unchanged under `public/resume/gashahun-demise-resume.pdf`, with download links in the hero and contact sections. Contact email is gashahundemise21@gmail.com.
+All copy and data live in `lib/content.ts`; pages and components only render it. See AUDIT.md for sources.
+The research section and charts use the numbers in the Enset manuscript draft (unpublished, labelled as such).
+`profile.resume` is `null` because the previous PDF was removed from `public/resume/`. The site then offers
+"Request resume" by email. To publish a resume, add the approved PDF under `public/resume/` and set the path.
 
 ## Deployment
 
@@ -26,14 +29,15 @@ Official guide: https://vercel.com/docs/analytics/quickstart
 
 ## Files
 
-- `app/page.tsx`: homepage sections.
-- `app/projects/[slug]/page.tsx`: project notes and sources.
-- `app/layout.tsx`: shared metadata and analytics.
-- `app/globals.css`: responsive design and reduced-motion styles.
-- `components/`: navigation, footer, optional interaction tracking.
-- `lib/content.ts`: profile, skills, project evidence.
-- `app/sitemap.ts`, `app/robots.ts`, `app/opengraph-image.tsx`: SEO.
-- `tests/`: content integrity checks.
+- `app/page.tsx`: single-page overview (hero, about, research, work, experience, skills, education, contact).
+- `app/research/page.tsx`: the enset study (problem, dataset, evaluation design, results, limitations).
+- `app/projects/[slug]/page.tsx`: case studies (problem → approach → architecture → implementation → challenges → results → lessons).
+- `components/charts.tsx`: confusion matrix, model comparison and class balance, rendered from the manuscript tables.
+- `components/SystemDiagram.tsx`: architecture lanes drawn from each project's documentation.
+- `app/globals.css`: design tokens, light/dark (follows the OS), responsive and reduced-motion styles.
+- `next.config.ts`: security headers and redirects from the old `/skills`, `/experience`, `/education`, `/projects/enset` URLs.
+- `tests/content.test.mjs`: checks the published numbers against each other (fold means/SDs, confusion-matrix rates) and that no private links appear.
+- `tests/browser-check.mjs`: axe WCAG A/AA in light and dark, links, anchors, redirects, widths 360–1024, mobile menu, 404, OG image.
 
 No contact service, credentials, backend database, or owner dashboard is required. Email and social links provide contact options. The technical illustrations are conceptual graphics, not model output or application screenshots.
 

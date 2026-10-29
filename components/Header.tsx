@@ -1,7 +1,56 @@
-"use client";
+'use client';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { Menu, X } from 'lucide-react';
-const links=[['Overview','/'],['Skills','/skills'],['Experience','/experience'],['Projects','/projects'],['Education','/education'],['Research','/research']];
-export function Header(){const [open,setOpen]=useState(false);const path=usePathname();const menuRef=useRef<HTMLButtonElement>(null);useEffect(()=>{if(!open)return;const close=(event:KeyboardEvent)=>{if(event.key==='Escape'){setOpen(false);menuRef.current?.focus();}};document.addEventListener('keydown',close);return()=>document.removeEventListener('keydown',close);},[open]);return <header className="header"><Link className="wordmark" href="/" aria-label="Gashahun Demise home"><span className="brand-monogram">GD</span><span>Gashahun Demise<small>RESEARCH & ENGINEERING</small></span></Link><div className="header-controls"><button ref={menuRef} className="menu-toggle" aria-expanded={open} aria-controls="main-nav" aria-label={open?'Close navigation':'Open navigation'} onClick={()=>setOpen(!open)}>{open?<X/>:<Menu/>}</button></div><nav id="main-nav" className={open?'nav open':'nav'} aria-label="Main navigation">{links.map(([name,href])=><Link key={href} href={href} onClick={()=>setOpen(false)} aria-current={(href==='/'?path==='/':path.startsWith(href))?'page':undefined}>{name}</Link>)}</nav></header>}
+
+const links = [
+  ['About', '/#about'],
+  ['Research', '/research'],
+  ['Work', '/#work'],
+  ['Experience', '/#experience'],
+  ['Skills', '/#skills'],
+  ['Contact', '/#contact'],
+] as const;
+
+export function Header() {
+  const [open, setOpen] = useState(false);
+  const menuRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+    const close = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setOpen(false);
+        menuRef.current?.focus();
+      }
+    };
+    document.addEventListener('keydown', close);
+    return () => document.removeEventListener('keydown', close);
+  }, [open]);
+
+  return (
+    <header className="header">
+      <div className="header-inner wrap">
+        <Link className="wordmark" href="/" aria-label="Gashahun Demise, home">
+          <span className="mark" aria-hidden="true">GD</span>
+          <span className="wordmark-name">Gashahun Demise</span>
+        </Link>
+        <button
+          ref={menuRef}
+          className="menu-toggle"
+          aria-expanded={open}
+          aria-controls="main-nav"
+          aria-label={open ? 'Close navigation' : 'Open navigation'}
+          onClick={() => setOpen(!open)}
+        >
+          {open ? <X size={20} /> : <Menu size={20} />}
+        </button>
+        <nav id="main-nav" className={open ? 'nav open' : 'nav'} aria-label="Main navigation">
+          {links.map(([name, href]) => (
+            <Link key={href} href={href} onClick={() => setOpen(false)}>{name}</Link>
+          ))}
+        </nav>
+      </div>
+    </header>
+  );
+}

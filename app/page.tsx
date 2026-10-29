@@ -1,14 +1,231 @@
 import Link from 'next/link';
-import { ArrowUpRight, Download, ArrowRight } from 'lucide-react';
-import { profile, projects } from '@/lib/content';
+import { ArrowRight, ArrowUpRight, Mail } from 'lucide-react';
+import { about, certifications, education, enset, experience, languages, profile, projects, skills } from '@/lib/content';
+import { ConfusionMatrix, ModelComparison } from '@/components/charts';
+import { SystemDiagram } from '@/components/SystemDiagram';
+import { ResumeLink } from '@/components/ResumeLink';
 import { TrackedLink } from '@/components/TrackedLink';
-import { ProjectFigure } from '@/components/ProjectFigure';
 import { siteUrl } from '@/lib/site';
-export const metadata={alternates:{canonical:'/'}};
-export default function Home(){return <main id="main">
-<script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify({'@context':'https://schema.org','@type':'Person',name:profile.name,url:siteUrl,jobTitle:'Computer Vision Researcher',sameAs:[profile.github,profile.linkedin],alumniOf:{'@type':'CollegeOrUniversity',name:'Addis Ababa Science and Technology University'}})}}/>
-<section className="hero wrap"><div className="hero-copy"><p className="eyebrow"><span className="identity-dot"/> COMPUTER VISION · MACHINE LEARNING</p><h1>Gashahun<br/><em>Demise.</em></h1><p className="hero-role">Computer Vision Researcher & Software Engineer</p><p className="intro">I work across computer vision at the Ethiopian Artificial Intelligence Institute—from dataset development to model evaluation—and build the software around it.</p><div className="actions"><Link className="button primary" href="#selected-work">Explore work <ArrowRight size={17}/></Link><TrackedLink event="resume_download" className="button secondary" href={profile.resume} download="Gashahun-Demise-Resume.pdf">Download resume <Download size={16}/></TrackedLink></div><p className="hero-location">Based in Addis Ababa, Ethiopia</p></div><div className="hero-visual"><ProjectFigure/><div className="visual-note"><span>DATA → MODELS → USEFUL SYSTEMS</span><span>Research & engineering</span></div></div></section>
-<section className="research-lead wrap" id="selected-work"><div className="section-heading"><p className="eyebrow">01 / FEATURED RESEARCH</p><Link className="text-link" href="/research">Research overview <ArrowUpRight size={16}/></Link></div><div className="research-layout"><div><span className="work-type">COMPUTER VISION / DOCUMENTED PROJECT</span><h2>Understanding disease<br/><em>through leaf images.</em></h2><p>Enset disease classification: image preparation, transfer learning, model comparison, and evaluation beyond a single accuracy score.</p><div className="research-methods"><span>Transfer learning</span><span>Cross-validation</span><span>Grad-CAM</span><span>TensorFlow Lite</span></div><Link className="text-link strong" href="/projects/enset">Read the research study <ArrowUpRight size={20}/></Link></div><div className="method-sheet"><p className="eyebrow">A REPRODUCIBLE RESEARCH WORKFLOW</p>{[['01','Prepare','Labels, preprocessing, and dataset quality.'],['02','Compare','Transfer learning and model fine-tuning.'],['03','Evaluate','Per-class metrics and visual error analysis.'],['04','Optimize','Quantization for TensorFlow Lite.']].map(([n,t,d])=><div className="method-step" key={n}><span>{n}</span><div><h3>{t}</h3><p>{d}</p></div></div>)}<small>Methods documented in the resume. Public training artifacts are not available.</small></div></div></section>
-<section className="section wrap"><div className="section-heading"><p className="eyebrow">02 / SELECTED SOFTWARE</p><Link className="text-link" href="/projects">All projects <ArrowUpRight size={16}/></Link></div><div className="work-list">{['hope-lounge','saasforge','taskflow'].map((slug,i)=>{const p=projects.find(p=>p.slug===slug)!;return <Link className="work-row" key={slug} href={'/projects/'+slug}><span className="work-index">0{i+1}</span><div className="work-name"><span className="work-type">{p.category}</span><h3>{p.name}</h3></div><p>{p.summary}</p><ArrowUpRight className="work-arrow" size={26}/></Link>})}</div></section>
-<section className="profile-band wrap"><p className="eyebrow">03 / BACKGROUND</p><div><h2>Research grounded<br/>in engineering.</h2><p>B.Sc. in Electrical & Computer Engineering, AASTU. Currently a Computer Vision Researcher at EAII, with experience in image annotation, dataset QA, and model development.</p><div className="inline-links"><Link href="/experience">Experience <ArrowUpRight size={16}/></Link><Link href="/skills">Technical toolkit <ArrowUpRight size={16}/></Link><Link href="/education">Education <ArrowUpRight size={16}/></Link></div></div></section>
-</main>}
+
+export const metadata = { alternates: { canonical: '/' } };
+
+const lead = enset.models[0];
+const facts = [
+  [enset.dataset.total.toLocaleString('en-US'), 'field images, three classes'],
+  [lead.mean.toFixed(2) + '%', `mean test accuracy, ±${lead.sd.toFixed(2)} across five folds`],
+  ['1.37%', 'aged leaves misread as wilt (best fold)'],
+  [(lead.params / 1e3).toFixed(0) + 'k', 'parameters, smallest of five backbones'],
+] as const;
+
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: profile.name,
+  url: siteUrl,
+  email: 'mailto:' + profile.email,
+  jobTitle: 'Computer Vision Researcher',
+  worksFor: { '@type': 'Organization', name: 'Ethiopian Artificial Intelligence Institute' },
+  alumniOf: { '@type': 'CollegeOrUniversity', name: 'Addis Ababa Science and Technology University' },
+  knowsAbout: ['Computer vision', 'Machine learning', 'Deep learning', 'Model evaluation', 'Software engineering'],
+  sameAs: [profile.github, profile.linkedin],
+};
+
+function SectionHead({ index, label, title, children }: { index: string; label: string; title: React.ReactNode; children?: React.ReactNode }) {
+  return (
+    <div className="section-head">
+      <p className="eyebrow"><span className="idx">{index}</span>{label}</p>
+      <h2>{title}</h2>
+      {children}
+    </div>
+  );
+}
+
+export default function Home() {
+  const featured = projects.filter(p => p.featured);
+  const more = projects.filter(p => !p.featured);
+  return (
+    <main id="main">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }} />
+
+      <section className="hero wrap" aria-labelledby="hero-title">
+        <div className="hero-copy">
+          <p className="eyebrow">{profile.headline}</p>
+          <h1 id="hero-title">{profile.name}</h1>
+          <p className="statement">
+            I build computer vision models that hold up under <em>honest evaluation</em>, and the software that puts them to work.
+          </p>
+          <p className="intro">
+            Computer vision researcher at the Ethiopian Artificial Intelligence Institute and PhD student in AI Engineering at Addis Ababa University.
+            I work on the whole path, from field images and labelling rules to leakage-resistant splits, model comparison and the applications around them.
+          </p>
+          <div className="actions">
+            <Link className="button primary" href="/research">Read the research <ArrowRight size={16} aria-hidden="true" /></Link>
+            <a className="button secondary" href="#work">Selected work</a>
+            <ResumeLink className="button ghost" />
+          </div>
+          <p className="hero-links">
+            <TrackedLink event="github" href={profile.github} target="_blank" rel="noopener noreferrer">GitHub <ArrowUpRight size={14} aria-hidden="true" /></TrackedLink>
+            <TrackedLink event="linkedin" href={profile.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn <ArrowUpRight size={14} aria-hidden="true" /></TrackedLink>
+            <span>{profile.location}</span>
+          </p>
+        </div>
+        <div className="hero-figure">
+          <ConfusionMatrix compact />
+        </div>
+      </section>
+
+      <section className="facts wrap" aria-label="Key results from the enset study">
+        <dl>
+          {facts.map(([value, label]) => (
+            <div key={label}>
+              <dt>{label}</dt>
+              <dd>{value}</dd>
+            </div>
+          ))}
+        </dl>
+        <p className="facts-note">Senescence-aware enset classification. {enset.status}.</p>
+      </section>
+
+      <section id="about" className="section wrap about">
+        <SectionHead index="01" label="About" title={<>Research that starts <em>before</em> the model.</>} />
+        <div className="about-grid">
+          <div className="about-text">
+            <p className="lede">{about.lead}</p>
+            {about.paragraphs.map(p => <p key={p.slice(0, 24)}>{p}</p>)}
+          </div>
+          <ul className="focus">
+            {about.focus.map(([title, text]) => (
+              <li key={title}><h3>{title}</h3><p>{text}</p></li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <section id="research" className="section wrap research">
+        <SectionHead index="02" label="Research" title={<>Telling disease apart from <em>age</em>.</>}>
+          <p className="section-sub">{enset.question}</p>
+        </SectionHead>
+        <div className="research-grid">
+          <div className="research-text">
+            <p className="status-chip">{enset.status}</p>
+            <h3>{enset.title}</h3>
+            <p>{enset.why}</p>
+            <p>{enset.contribution}</p>
+            <ul className="protocol-mini">
+              {enset.protocol.slice(0, 3).map(([t]) => <li key={t}>{t}</li>)}
+            </ul>
+            <Link className="text-link strong" href="/research">Methods, results and limitations <ArrowRight size={16} aria-hidden="true" /></Link>
+          </div>
+          <ModelComparison />
+        </div>
+      </section>
+
+      <section id="work" className="section wrap work">
+        <SectionHead index="03" label="Selected work" title={<>Software built for <em>real</em> users.</>}>
+          <p className="section-sub">Delivered and public projects. Each case study says what can and cannot be verified.</p>
+        </SectionHead>
+        <div className="work-featured">
+          {featured.map((p, i) => (
+            <article className="work-item" key={p.slug}>
+              <div className="work-copy">
+                <p className="work-meta"><span className="idx">0{i + 1}</span>{p.kind}{p.period && <> · {p.period}</>}</p>
+                <h3><Link href={'/projects/' + p.slug}>{p.name}</Link></h3>
+                <p>{p.summary}</p>
+                <p className="work-role">{p.role}</p>
+                <ul className="tags">{p.stack.slice(0, 6).map(t => <li key={t}>{t}</li>)}</ul>
+                <Link className="text-link" href={'/projects/' + p.slug} aria-label={'Read the ' + p.name + ' case study'}>Case study <ArrowRight size={15} aria-hidden="true" /></Link>
+              </div>
+              <SystemDiagram project={p} />
+            </article>
+          ))}
+        </div>
+        <div className="work-more">
+          <h3 className="minor-title">Other public code</h3>
+          <ul>
+            {more.map(p => (
+              <li key={p.slug}>
+                <Link href={'/projects/' + p.slug}>
+                  <span className="more-name">{p.name}</span>
+                  <span className="more-kind">{p.kind}</span>
+                  <span className="more-summary">{p.summary}</span>
+                  <ArrowUpRight size={18} aria-hidden="true" />
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <section id="experience" className="section wrap experience">
+        <SectionHead index="04" label="Experience" title={<>Where I <em>work</em>.</>} />
+        <ol className="timeline">
+          {experience.map(job => (
+            <li key={job.role} className={job.current ? 'current' : undefined}>
+              <div className="tl-when">
+                <span>{job.period}</span>
+                {job.current && <span className="now">Current</span>}
+              </div>
+              <div className="tl-body">
+                <h3>{job.role}</h3>
+                <p className="tl-org">{job.org} · {job.place}</p>
+                <ul className="tl-points">{job.points.map(pt => <li key={pt}>{pt}</li>)}</ul>
+                <ul className="tags small">{job.tools.map(t => <li key={t}>{t}</li>)}</ul>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      <section id="skills" className="section wrap skills">
+        <SectionHead index="05" label="Technical expertise" title={<>Tools I have <em>used</em> in this work.</>}>
+          <p className="section-sub">Listed only where the resume, the research or the projects above back them up.</p>
+        </SectionHead>
+        <div className="skill-grid">
+          {skills.map(s => (
+            <div className="skill-group" key={s.group}>
+              <h3>{s.group}</h3>
+              <ul>{s.items.map(i => <li key={i}>{i}</li>)}</ul>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section id="education" className="section wrap education">
+        <SectionHead index="06" label="Education" title={<>Engineering, then <em>AI</em>.</>} />
+        <div className="edu-grid">
+          {education.map(e => (
+            <article key={e.degree} className={'edu ' + e.status}>
+              <p className="edu-period">{e.period}<span className="edu-status">{e.status === 'ongoing' ? 'Ongoing' : 'Completed'}</span></p>
+              <h3>{e.degree}</h3>
+              <p className="edu-school">{e.school}</p>
+              <p>{e.note}</p>
+            </article>
+          ))}
+          <article className="edu extra">
+            <p className="edu-period">Certification</p>
+            {certifications.map(c => <h3 key={c.name}>{c.name}<span className="edu-school block">{c.issuer}</span></h3>)}
+            <p className="edu-period lang">Languages</p>
+            <p>{languages.join(' · ')}</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="contact" className="section wrap contact">
+        <SectionHead index="07" label="Contact" title={<>Open to ML, computer vision and <em>research engineering</em> roles.</>} />
+        <div className="contact-grid">
+          <TrackedLink event="email" className="contact-email" href={'mailto:' + profile.email}>
+            <Mail size={22} aria-hidden="true" />{profile.email}
+          </TrackedLink>
+          <div className="contact-side">
+            <p>Email is the most direct way to reach me. For a role or a research collaboration, a short note about the problem you are working on helps me give a useful reply.</p>
+            <div className="actions">
+              <ResumeLink className="button primary" />
+              <TrackedLink event="github" className="button secondary" href={profile.github} target="_blank" rel="noopener noreferrer">GitHub <ArrowUpRight size={15} aria-hidden="true" /></TrackedLink>
+              <TrackedLink event="linkedin" className="button secondary" href={profile.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn <ArrowUpRight size={15} aria-hidden="true" /></TrackedLink>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  );
+}

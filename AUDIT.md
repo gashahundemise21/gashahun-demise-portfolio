@@ -25,3 +25,15 @@ Create a concise editorial design in Next.js; separate content and presentation;
 ## Owner update — 9 October 2026
 
 The owner supplied `Gashahun Demise.pdf` and explicitly requested a public resume download and contact email gashahundemise21@gmail.com. The PDF was checked as a readable one-page document with no encryption or JavaScript, and visually reviewed. It is published byte-for-byte unchanged. Its statements are owner-provided resume content; publishing it does not independently verify its research metrics. The website contact email now uses the owner's explicit correction.
+
+## Redesign audit — 29 October 2026
+
+Sources used for this version:
+
+- **Resume (primary).** The previously published one-page resume (sha256 `adb81550…`) and its 22 October rewording agree on roles, dates, education and projects. A 15 October two-page version conflicts with them (degree 2016–2021, internship 2020–2021, GPA 3.85, "5+ years"); it was not used.
+- **PhD, AI Engineering, Addis Ababa University (in progress).** From a 2 October research resume and the owner's brief; not in the one-page resume. Shown as ongoing with no dates. A "fast-track master's pathway" in that resume still contained a template placeholder and was left out.
+- **Enset study.** The manuscript draft in Springer LNCS format (18 September 2026): dataset counts, protocol, per-fold results for five backbones, the fold-3 confusion matrix, the binary comparison and parameter counts. The manuscript is unpublished and the site says so. The resume's "custom model reached 97.5%" is not supported by the manuscript and is not used. The owner is listed in the manuscript as second and corresponding author of six; co-authors are not named on the site.
+- **Leakage audit.** Described in the 2 October research resume (hashing, perceptual hashing, embeddings, clustering) and consistent with the manuscript's plant-wise partitioning. It is presented qualitatively; the resume's earlier fold accuracies and test-pool size are not used.
+- **Hope Lounge.** Resume, plus the project's own system documentation (March 2026) for the architecture. `Gosa5497/qr_menu` is now private and `hopeloungemenu.com` serves a cPanel default page, so neither is linked. The 50% staffing figure is shown as the owner's own reported figure.
+- **SaaSForge / TaskFlow.** Public repositories; listed as "other public code" with modest claims. SaaSForge commits are authored by a generic assistant identity, so no individual engineering claims are made beyond the repository's contents.
+- **Not used:** dataset photographs and Grad-CAM images (institutional research data; publication not confirmed), the owner's profile photo, the phone number.
