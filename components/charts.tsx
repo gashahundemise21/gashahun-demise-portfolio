@@ -3,56 +3,6 @@ import { enset } from '@/lib/content';
 // Figures drawn from the manuscript tables in lib/content.ts. Each one renders the real numbers
 // and carries a caption naming its source, so nothing here is decorative data.
 
-const pct = (n: number) => n.toFixed(2) + '%';
-
-export function ConfusionMatrix({ compact = false }: { compact?: boolean }) {
-  const { labels, matrix } = enset.confusion;
-  const total = matrix.flat().reduce((a, b) => a + b, 0);
-  const correct = matrix.reduce((a, row, i) => a + row[i], 0);
-  return (
-    <figure className={'figure confusion' + (compact ? ' compact' : '')}>
-      <div className="figure-head">
-        <span>Fig. {compact ? '1' : '3'}</span>
-        <span>Confusion matrix · held-out test</span>
-      </div>
-      <table className="cm">
-        <caption className="sr-only">
-          MobileNetV3-Small, fold 3. Rows are true classes, columns are predicted classes.
-        </caption>
-        <thead>
-          <tr>
-            <th scope="col"><span className="cm-axis">true ↓ · pred →</span></th>
-            {labels.map(l => <th scope="col" key={l}>{l}</th>)}
-          </tr>
-        </thead>
-        <tbody>
-          {matrix.map((row, i) => {
-            const rowTotal = row.reduce((a, b) => a + b, 0);
-            return (
-              <tr key={labels[i]}>
-                <th scope="row">{labels[i]}</th>
-                {row.map((v, j) => {
-                  const share = v / rowTotal;
-                  const flagged = labels[i] === 'Aged' && labels[j] === 'Bacterial wilt';
-                  const cls = ['cm-cell', i === j ? 'diag' : 'off', flagged ? 'flag' : ''].join(' ');
-                  return (
-                    <td key={j} className={cls} style={{ '--share': share.toFixed(3) } as React.CSSProperties}>
-                      <span className="cm-n">{v}</span>
-                      <span className="cm-p">{(share * 100).toFixed(1)}%</span>
-                    </td>
-                  );
-                })}
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-      <figcaption>
-        Best MobileNetV3-Small model: {correct} of {total} right ({pct((correct / total) * 100)}). Only <strong>7 of 510</strong> old leaves were called wilt.
-      </figcaption>
-    </figure>
-  );
-}
 
 export function ModelComparison() {
   const lo = 84, hi = 98;
@@ -62,7 +12,7 @@ export function ModelComparison() {
   return (
     <figure className="figure models">
       <div className="figure-head">
-        <span>Fig. 2</span>
+        <span>Fig. 1</span>
         <span>Test accuracy by model</span>
       </div>
       <div className="models-grid" role="table" aria-label="Held-out test accuracy and parameter count per architecture">

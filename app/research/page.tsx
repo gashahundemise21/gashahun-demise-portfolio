@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 import { enset, profile } from '@/lib/content';
-import { ClassBalance, ConfusionMatrix, ModelComparison } from '@/components/charts';
+import { ClassBalance, ModelComparison } from '@/components/charts';
 
 export const metadata = {
   title: 'Research · Senescence-aware enset classification',
@@ -76,7 +76,6 @@ export default function Research() {
               </tbody>
             </table>
           </div>
-          <ConfusionMatrix />
           <ul className="findings">{enset.findings.map(f => <li key={f}>{f}</li>)}</ul>
         </section>
 

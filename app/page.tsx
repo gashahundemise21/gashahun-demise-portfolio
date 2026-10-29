@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { ArrowRight, ArrowUpRight, Briefcase, Mail, MapPin } from 'lucide-react';
 import { Github, Linkedin } from '@/components/BrandIcons';
 import { about, certifications, education, enset, experience, languages, profile, projects, skills } from '@/lib/content';
-import { ConfusionMatrix, ModelComparison } from '@/components/charts';
+import { ModelComparison } from '@/components/charts';
 import { SystemDiagram } from '@/components/SystemDiagram';
 import { ResumeLink } from '@/components/ResumeLink';
 import { TrackedLink } from '@/components/TrackedLink';
@@ -91,7 +91,6 @@ export default function Home() {
       </section>
 
       <section className="wrap facts-band" aria-label="Key results from the enset study">
-        <ConfusionMatrix compact />
         <div className="facts">
           <dl>
             {facts.map(([value, label]) => (
